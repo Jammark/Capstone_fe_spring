@@ -1,0 +1,8 @@
+{
+  "name": "my-awesome-package",
+  "version": "1.0.0",
+  "author": "Your Name <email@example.com>",
+  "dependencies": {
+    "mdb-ui-kit": "^6.4.2"
+  }
+}
