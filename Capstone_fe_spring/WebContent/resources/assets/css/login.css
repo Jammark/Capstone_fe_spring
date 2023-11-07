@@ -1,0 +1,18 @@
+#main{
+  min-height: 100vh;
+  background-image: url('../imgs/sfondoesercizio4.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  
+  }
+  #main label{
+color: white;
+  }
+ #main a{
+    color: rgb(151, 59, 193);
+  }
+
+
+.btn-primary i{
+  color:white;
+}
