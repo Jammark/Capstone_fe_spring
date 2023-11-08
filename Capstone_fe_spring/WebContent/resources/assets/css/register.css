@@ -1,0 +1,15 @@
+#main {
+  min-height: 100vh;
+  background-image: url("../../../../assets/imgs/7304345.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+#main label {
+  color: white;
+}
+
+.btn-primary i {
+  color: white;
+}
+
+/*# sourceMappingURL=register.css.map */
