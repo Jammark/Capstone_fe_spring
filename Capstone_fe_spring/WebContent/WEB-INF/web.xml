@@ -10,6 +10,10 @@
     <welcome-file>default.htm</welcome-file>
   </welcome-file-list>
   
+  <listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+   
   <servlet>
         <servlet-name>spring</servlet-name>
         <servlet-class>
@@ -26,4 +30,13 @@
         <servlet-name>spring</servlet-name>
         <url-pattern>/</url-pattern> 
     </servlet-mapping>
+    
+    <servlet>
+		<servlet-name>LoginServlet</servlet-name>
+		<servlet-class>capstone.fe.spring.servlet.LoginServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LoginServlet</servlet-name>
+		<url-pattern>/Login7</url-pattern>
+	</servlet-mapping>
 </web-app>

@@ -13,33 +13,55 @@
 <%@ include file="/WEB-INF/views/fragments/head.jspf" %>
 <spring:url value="/resources/css/login.css" var="crunchifyCSS" />
 <link rel="stylesheet" href="<c:url value="/resources/assets/css/login.css" />"/>
-<script type="text/javascript" src="<c:url value="/resources/assets/js/login.js" />"></script>
+<script src="/webjars/bootstrap/dist/js/bootstrap.esm.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.1/angular.min.js"></script>
+<script type="module" src="<c:url value="/resources/assets/js/login.js" />"></script>
+<script type="text/javascript" src="<c:url value="/resources/assets/js/warning.js" />"></script>
+
+
 </head>
 <body>
+
+<%
+if(request.getAttribute("logged") != null){
+	Boolean logged = (Boolean)request.getAttribute("logged");
+	if(logged){%>
+	<script type="text/javascript">showModal()</script>
+	<%
+	}else{%>
+	<script type="text/javascript">showWarning()</script>
+	
+	<% }
+	
+	
+}
+
+%>
 
 <jsp:useBean id="obj" class="capstone.fe.spring.model.LoginRequest"/>  
   
 <jsp:setProperty property="*" name="obj"/>  
-
-<div id="main" class="d-flex justify-content-center align-items-center">
+<section class="container" ng-app="loginApp">
+<div id="main" class="d-flex justify-content-center align-items-center" ng-controller="loginCtrl" ng-init="initLogin()">
+<%@ include file="/WEB-INF/views/fragments/warning.jspf" %>
   <div>
-    <form action="accedi(form)">
+    <form>
         <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" id="email" name="username" class="form-control" required>
+            <input type="email" id="email" name="username" class="form-control" required >
         </div>
         <div class="form-group">
             <label for="password">Password</label>
-            <input type="password" id="password" name="password" class="form-control" required>
+            <input type="password" id="password" name="password" class="form-control" required >
         </div>
-        <button id="btn" type="submit" class="btn btn-primary mt-3" disabled=""><i class="fa-solid fa-right-to-bracket me-2"></i>Accedi</button>
+        <button id="btn" type="submit" class="btn btn-primary mt-3" disabled="" ng-click="login()"><i class="fa-solid fa-right-to-bracket me-2"></i>Accedi</button>
     </form>
     <div class="my-2 w-100 d-flex justify-content-center">
-      <a  [routerLink]="['/register']" class="active">Registrati</a>
+      <a  href="register" class="active">Registrati</a>
     </div>
   </div>
 </div>
-
+</section>
               <!--Modal: modalPush-->
               <div class="modal fade" id="modalSuccess" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
               aria-hidden="true">
@@ -63,7 +85,7 @@
                   <!--Footer-->
                   <div class="modal-footer flex-center">
 
-                    <a type="button" class="btn btn-outline-info waves-effect"  data-mdb-dismiss="modal" >OK</a>
+                    <a type="button" class="btn btn-outline-info waves-effect"  data-bs-dismiss="modal" >OK</a>
                   </div>
                 </div>
                 <!--/.Content-->

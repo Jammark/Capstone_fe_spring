@@ -9,10 +9,12 @@
   
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        
     </properties>
     
   <build>
     <plugins>
+		
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.8.1</version>
@@ -95,6 +97,7 @@
 							<arguments>install</arguments>
 						</configuration>
 					</execution>
+					
 
          		  <execution>
                     <id>npm run-script build</id>
@@ -106,6 +109,21 @@
                         <!-- arguments>run-script build</arguments-->
                     </configuration>
                 </execution>
+                
+                
+                <execution>
+						<id>npm bootstrap</id>
+						<goals>
+							<goal>npm</goal>
+						</goals>
+						<phase>generate-resources</phase>
+						<configuration>
+							<arguments>install bootstrap --save</arguments>
+						</configuration>
+					</execution>
+
+				
+                
                 
                 <execution>
 						<id>npm mdb</id>
@@ -121,6 +139,7 @@
 				</executions>
 
 				<configuration>
+					<installDirectory>target</installDirectory>
 					<nodeVersion>v16.14.2</nodeVersion>
 				</configuration>
 
@@ -132,17 +151,107 @@
   
   	<!-- Add Spring Web and MVC dependencies -->
 	<dependencies>
+		<!--
 		<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-autoconfigure</artifactId>
+    <version>3.2.1</version>
+</dependency>
+		-->
+		<!--
+		<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot</artifactId>
+    <version>3.2.1</version>
+</dependency>
+-->
+		
+		<dependency>
+    <groupId>org.webjars</groupId>
+    <artifactId>bootstrap</artifactId>
+    <version>5.3.2</version>
+</dependency>
+
+<dependency>
+    <groupId>com.fasterxml.jackson.datatype</groupId>
+    <artifactId>jackson-datatype-jsr310</artifactId>
+    <version>2.16.1</version>
+</dependency>
+
+<dependency>
+    <groupId>com.fasterxml.jackson.core</groupId>
+    <artifactId>jackson-annotations</artifactId>
+    <version>2.16.1</version>
+</dependency>
+
+<!--
+
+<dependency>
+    	<groupId>org.springframework</groupId>
+    	<artifactId>spring-context</artifactId>
+    	<version>6.0.11</version>
+	</dependency>
+	-->
+ <!--
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-core</artifactId>
+	    <version>6.0.11</version>
+	</dependency>
+	-->
+	<!--
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-beans</artifactId>
+	    <version>6.0.11</version>
+	</dependency>
+-->
+
+	<dependency>
 			<groupId>org.springframework</groupId>
-			<artifactId>spring-webmvc</artifactId>
-			<version>4.3.9.RELEASE</version>
+			<artifactId>spring-context</artifactId>
+			<version>6.1.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
-			<artifactId>spring-web</artifactId>
-			<version>4.3.9.RELEASE</version>
+			<artifactId>spring-context-support</artifactId>
+			<version>6.1.2</version>
 		</dependency>
-		<!-- Servlet -->
+
+
+		<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-core</artifactId>
+    <version>6.1.2</version>
+</dependency>
+		<dependency>
+			<artifactId>spring-beans</artifactId>
+			<groupId>org.springframework</groupId>
+			<version>6.1.2</version>
+		</dependency>
+		
+		<dependency> 
+     <groupId>org.springframework</groupId> 
+     <artifactId>spring-aspects</artifactId> 
+     <version>3.1.2.RELEASE</version> 
+</dependency>
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>1.7.4</version>
+		</dependency>
+		
+
+		<!-- Servlet 
+	
+     <dependency>
+    <groupId>javax.servlet</groupId>
+    <artifactId>javax.servlet-api</artifactId>
+    <version>4.0.0</version>
+    <scope>provided</scope>
+</dependency>-->
+
+	<!-- Servlet -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
@@ -155,6 +264,55 @@
 			<version>2.1</version>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+
+<!-- https://mvnrepository.com/artifact/org.springframework/spring-web -->
+<dependency>
+	<groupId>org.springframework</groupId>
+	<artifactId>spring-web</artifactId>
+	<version>5.3.29</version>
+</dependency>
+<!-- Use Spring Web version 5 dependency, because version 6
+isn't compatible with Java 17' -->
+<!-- https://mvnrepository.com/artifact/org.springframework/spring-webmvc -->
+<dependency>
+	<groupId>org.springframework</groupId>
+	<artifactId>spring-webmvc</artifactId>
+	<version>5.3.29</version>
+</dependency>
+<!--
+<dependency>
+    <groupId>javax.servlet.jsp</groupId>
+    <artifactId>javax.servlet.jsp-api</artifactId>
+    <version>2.3.3</version>
+    <scope>provided</scope>
+</dependency>
+-->
+
+
+<!--
+   <dependency> 
+	   <groupId>org.springframework</groupId> 
+	   <artifactId>spring-context</artifactId> 
+	   <version>6.1.1</version> 
+	   </dependency> 
+-->
+
+        <!-- Required only for Tomcat. If run on other J2EE server,
+            remove this dependency and use provided tag libraries.
+     <dependency>
+    <groupId>javax.servlet.jsp.jstl</groupId>
+    <artifactId>javax.servlet.jsp.jstl-api</artifactId>
+    <version>1.2.2</version>
+    <scope>provided</scope>
+</dependency>
+ -->
+ 
+ 
 <!-- https://mvnrepository.com/artifact/javax.servlet/jstl -->
 <dependency>
 	<groupId>jstl</groupId>
@@ -189,12 +347,36 @@
     <version>2.15.0</version>
 </dependency>
 
-<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations -->
-<dependency>
-    <groupId>com.fasterxml.jackson.core</groupId>
-    <artifactId>jackson-annotations</artifactId>
-    <version>2.15.0</version>
+  
+	  <dependency>
+    <groupId>org.slf4j</groupId>
+    <artifactId>slf4j-api</artifactId>
+    <version>2.0.7</version>
 </dependency>
+
+<dependency>
+    <groupId>ch.qos.logback</groupId>
+    <artifactId>logback-core</artifactId>
+    <version>1.4.8</version>
+</dependency>
+
+<dependency>
+    <groupId>ch.qos.logback</groupId>
+    <artifactId>logback-classic</artifactId>
+    <version>1.4.8</version>
+  <!--  <scope>test</scope>-->
+</dependency>
+
+<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+<dependency>
+    <groupId>org.projectlombok</groupId>
+    <artifactId>lombok</artifactId>
+    <version>1.18.28</version>
+    <scope>provided</scope>
+</dependency>
+
+<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations -->
+
 	</dependencies>
 
 

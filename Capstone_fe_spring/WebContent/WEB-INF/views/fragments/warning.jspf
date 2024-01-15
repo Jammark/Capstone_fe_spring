@@ -1,0 +1,30 @@
+ <!--Modal: modalPush-->
+                  <div class="modal fade" id="modalWarning" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                  aria-hidden="true">
+                  <div class="modal-dialog modal-warn modal-notify" role="document">
+                    <!--Content-->
+                    <div class="modal-content text-center">
+                      <!--Header-->
+                      <div class="modal-header d-flex justify-content-center">
+                        <p class="heading">Attenzione!</p>
+                      </div>
+
+                      <!--Body-->
+                      <div class="modal-body">
+
+                        <i class="fas fa-solid fa-triangle-exclamation fa-4x animated rotateIn mb-4"></i>
+
+                        <p>Questa operazione non è andata a buon fine, riprovare in seguito.{{errorMsg}}</p>
+
+                      </div>
+
+                      <!--Footer-->
+                      <div class="modal-footer flex-center">
+
+                        <a type="button" class="btn btn-outline-warn waves-effect" data-bs-dismiss="modal" (click)="closeModal()">OK</a>
+                      </div>
+                    </div>
+                    <!--/.Content-->
+                  </div>
+                  </div>
+                  <!--Modal: modalPush-->

@@ -1,3 +1,5 @@
+//import * as bootstrap from '/webjars/bootstrap/dist/js/bootstrap.esm.min.js'
+
 window.onload = () => {
 	console.log('load');
 	let lista = document.getElementsByTagName('input');
@@ -19,3 +21,34 @@ window.onload = () => {
 		});
 	}
 }
+
+function showModal(){
+	var myModal = new bootstrap.Modal(document.getElementById(`modalSuccess`));
+      myModal.show();
+}
+
+var app = angular.module('loginApp', []);
+app.controller('loginCtrl', function($scope, $http){
+	
+	$scope.login = function(){
+		
+		console.log('credentials');
+		console.log($scope.un.value);
+		console.log($scope.pw.value);
+		
+		$http.post('http://localhost:3018/auth/login', {'email': $scope.un.value, 'password':$scope.pw.value})
+		.success(function(data){
+			showModal();
+		}).error(function(error){
+			console.log(error);
+			$scope.errorMsg = error.message;
+			showWarning();
+		});
+	};
+	
+	$scope.initLogin = function(){
+		$scope.un = document.getElementById('email');
+		$scope.pw = document.getElementById('password');
+	};
+	
+});

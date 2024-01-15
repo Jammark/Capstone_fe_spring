@@ -15,10 +15,14 @@
 
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<mvc:annotation-driven />
+	<!--  
+	<context:annotation-config/>
+	<context:spring-configured/>
+	-->
 	<context:component-scan base-package="capstone.fe.spring" />
 	
 	<mvc:resources mapping="/resources/**" location="/resources/" /> 
-
+<mvc:resources mapping="/webjars/**" location="/webjars/"/>
 	
 	<mvc:default-servlet-handler/>
 
@@ -29,5 +33,7 @@
 		<property name="prefix" value="/WEB-INF/views/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
-
+<!-- 
+<bean id="mapper" class="com.fasterxml.jackson.databind.ObjectMapper"></bean>
+ -->
 </beans>

@@ -1,4 +1,6 @@
 /Users/marcodinicola/Documents/nuova/capstone/frontend_spring/Capstone_fe_spring/src/main/java/capstone/fe/spring/servlet/LoginServlet.java
+/Users/marcodinicola/Documents/nuova/capstone/frontend_spring/Capstone_fe_spring/src/main/java/capstone/fe/spring/conf/SpringApplicationContextListener.java
+/Users/marcodinicola/Documents/nuova/capstone/frontend_spring/Capstone_fe_spring/src/main/java/capstone/fe/spring/conf/AppConfig.java
 /Users/marcodinicola/Documents/nuova/capstone/frontend_spring/Capstone_fe_spring/src/main/java/capstone/fe/spring/controller/HomeController.java
 /Users/marcodinicola/Documents/nuova/capstone/frontend_spring/Capstone_fe_spring/src/main/java/capstone/fe/spring/controller/LoginController.java
 /Users/marcodinicola/Documents/nuova/capstone/frontend_spring/Capstone_fe_spring/src/main/java/capstone/fe/spring/model/User.java

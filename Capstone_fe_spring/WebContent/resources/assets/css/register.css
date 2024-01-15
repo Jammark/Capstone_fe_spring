@@ -1,11 +1,16 @@
 #main {
   min-height: 100vh;
-  background-image: url("../../../../assets/imgs/7304345.jpg");
+  background-image: url("../imgs/sfondoesercizio4.png");
   background-repeat: no-repeat;
   background-size: cover;
 }
+
 #main label {
   color: white;
+}
+
+#main a {
+  color: #973bc1;
 }
 
 .btn-primary i {
