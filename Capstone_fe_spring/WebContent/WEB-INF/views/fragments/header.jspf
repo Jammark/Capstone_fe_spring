@@ -1,0 +1,127 @@
+<!--navbar-toggleable-lg-->
+<nav class="navbar navbar-toggle na sticky-top navbar-dark w-100" data-bs-theme="dark">
+  <div class="d-flex w-100 align-items-center justify-content-between px-3 position-relative">
+
+          <a class="navbar-brand" href="#"><img src="<c:url value="/resources/assets/imgs/mondo-icona-blu.png"/>"/>Agenzia viaggi online</a>
+          <div class="flex-grow-1"></div>
+          <div class="d-flex align-items-center">
+          <div class="collapse navbar-collapse position-absolute top-100 end-0 px-5 py-3 mt-3" id="navbarTogglerDemo01" 
+          >
+          <ul class="navbar-nav mb-2 mb-lg-0 align-items-start align-self-end ml-auto flex-column">
+              <li class="nav-item" >
+                  <a
+
+                      class="nav-link"
+                      aria-current="page"
+                      href="/home"
+                      
+                      >Home</a>
+
+              </li>
+              <li class="nav-item" >
+                <a *ngIf="!user"
+                    class="nav-link"
+                    href="/login"
+                   
+                    >Accedi</a>
+
+            </li>
+              <li class="nav-item" >
+                  <a *ngIf="user"
+                      class="nav-link"
+                      href="/mete"
+                      
+                      >Mete Turistiche</a>
+
+              </li>
+              <li class="nav-item">
+                  <a *ngIf="user"
+                      class="nav-link"
+                      href="/saldo"
+                      
+                      ><span *ngIf="this.count > 0"class="rounded-circle bg-white me-2 text-dark text-center d-flex align-items-center justify-content-center" style="height: 20px; width: 20px;">{{count}}</span>
+                      Saldo</a>
+
+              </li>
+              <li class="nav-item align-self-end" *ngIf="user">
+                <button type="button" class="btn btn-white float-end" *ngIf="user" data-toggle="modal" data-target="#modalPush"><i class="fa-solid fa-right-from-bracket me-2"></i>Logout</button>
+              </li>
+
+         </ul>
+
+         </div>
+
+          <h6 class="mb-0 mx-2 text-white" *ngIf="user">
+            Banvenuto ${user.nome} &nbsp; ${ user.cognome }
+        </h6>
+
+        <ul class="navbar-nav flex-row d-none d-md-flex align-items-center me-2" *ngIf="user">
+          <li class="nav-item me-3 me-lg-1 active">
+            <a class="nav-link position-relative mt-1 px-3" href="#">
+              <span class="w-100 h-100"><i id="fa" class="fa-solid fa-bag-shopping fa-3x"></i></span>
+              <span *ngIf="this.count > 0" class="badge rounded-pill badge-notification bg-danger">{{count}}</span>
+            </a>
+          </li>
+        </ul>
+
+        <button class="navbar-toggler"  aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation"  ng-click="externalContent.toggle()" data-mdb-collapse-init data-mdb-toggle="collapse" data-mdb-target="#navbarTogglerDemo01"
+        >
+       <!--  <span class="navbar-toggler-icon"></span>-->
+          <i class="fas fa-bars"></i>
+        </button>
+         </div>
+
+
+      </div>
+
+</nav>
+<section id="hero" class="d-flex align-items-center">
+
+  <div class="container-fluid px-4">
+    <div class="row">
+      <div class="col-lg-7 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1">
+        <h1>Le migliori soluzioni per le tue vacanze.</h1>
+        <h2>Siamo un team esperto e di successo nel campo del turismo di ogni genere</h2>
+        <div class="d-flex justify-content-center justify-content-lg-start">
+          <a class="btn-get-started scrollto" href="/mete">Inizia</a>
+          <a href="https://www.youtube.com/watch?v=_PfIaHeWr2k" class="glightbox btn-watch-video"><i class="bi bi-play-circle"></i><span>Guarda il video</span></a>
+        </div>
+      </div>
+      <div class="col-lg-5 order-1 order-lg-2 hero-img">
+        <img src="<c:url value="/resources/assets/template/img/viaggiare.png"/>" class="img-fluid animated" alt=""/>
+      </div>
+    </div>
+  </div>
+
+</section><!-- End Hero -->
+
+ <!--Modal: modalPush-->
+ <div class="modal fade" id="modalPush" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+ aria-hidden="true">
+ <div class="modal-dialog modal-notify modal-info" role="document">
+   <!--Content-->
+   <div class="modal-content text-center">
+     <!--Header-->
+     <div class="modal-header d-flex justify-content-center">
+       <p class="heading">Attenzione!</p>
+     </div>
+
+     <!--Body-->
+     <div class="modal-body">
+
+       <i class="fas fa-solid fa-right-from-bracket rotateIn mb-4"></i>
+
+       <p>Sicuro di voler uscire?</p>
+
+     </div>
+
+     <!--Footer-->
+     <div class="modal-footer flex-center">
+       <a  class="btn btn-info text-white" ng-click="logout()" data-dismiss="modal">Conferma</a>
+       <a type="button" class="btn btn-outline-info waves-effect" data-dismiss="modal">Annulla</a>
+     </div>
+   </div>
+   <!--/.Content-->
+ </div>
+ </div>
+ <!--Modal: modalPush-->

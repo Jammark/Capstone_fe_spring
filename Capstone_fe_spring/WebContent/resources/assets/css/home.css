@@ -1,0 +1,64 @@
+.card {
+  position: relative;
+}
+
+.card-body {
+  height: 700px;
+  background-color: white;
+}
+
+.card-footer {
+  background-color: white;
+}
+.card-footer button {
+  background-color: #37517e;
+}
+
+.card-header {
+  background-color: rgba(250, 250, 250, 0.7);
+  top: 170px;
+  left: 30px;
+  z-index: 1;
+}
+
+.card-text {
+  font-family: archetype, serif;
+  font-size: 21px;
+  font-style: italic;
+  font-weight: 400;
+  text-transform: none;
+  line-height: 1.6;
+  letter-spacing: normal;
+  color: #0d131a;
+}
+
+.card-title {
+  font-family: adobe-caslon-pro,sans-serif;
+  font-size: 29px;
+  font-style: italic;
+  font-weight: 400;
+  text-transform: none;
+  line-height: 1.4;
+  letter-spacing: normal;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.35);
+}
+
+.ts {
+  background-color: transparent;
+}
+
+.middle {
+  height: 600px;
+}
+
+#r {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.container {
+  width: 100vw !important;
+}
+
+/*# sourceMappingURL=home.css.map */

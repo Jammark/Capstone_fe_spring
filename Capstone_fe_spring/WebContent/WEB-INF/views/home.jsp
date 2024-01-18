@@ -3,85 +3,94 @@
 <!DOCTYPE html>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-  <%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
+  <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false"%>
+<%@ page import=" org.slf4j.Logger, org.slf4j.LoggerFactory"%>
+
 <html>
 <head>
 <title>Home</title>
 
-    <link
-  href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
-  rel="stylesheet"
-  integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
-  crossorigin="anonymous"
-/>
-<script
-  src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
-  integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
-  crossorigin="anonymous"
-></script>
-<!-- Font Awesome -->
-<link
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-  rel="stylesheet"
-/>
-<!-- Google Fonts -->
-<link
-  href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
-  rel="stylesheet"
-/>
-<!-- MDB -->
-<link
-  href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.css"
-  rel="stylesheet"
-/>
+ <%@ include file="/WEB-INF/views/fragments/head.jspf" %>
 
-<script
-  type="text/javascript"
-  src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.js"
-></script>
+<link rel="stylesheet" href="<c:url value="/resources/assets/css/home.css" />"/>
+<link rel="stylesheet" href="<c:url value="/webjars/mdbootstrap/4.20.0/css/mdb.min.css" />"/>
+<script src="<c:url value="/webjars/bootstrap/5.3.2/js/bootstrap.min.js" />"></script>
+<script src="<c:url value="/webjars/mdbootstrap/4.20.0/js/mdb.min.js" />"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.1/angular.min.js"></script>
+<script type="module" src="<c:url value="/resources/assets/js/home.js" />"></script>
+<script type="text/javascript" src="<c:url value="/resources/assets/js/warning.js" />"></script>
 </head>
 <body>
-	<h1>Hello world!</h1>
-
-	<P>The time on the server is ${serverTime}.</p>
-
-	<form action="user" method="post">
-		<input type="text" name="userName"><br> <input
-			type="submit" value="Login">
-			<input type="button" data-mdb-toggle="modal" data-mdb-target="#modalPushPrenota">test</input>
-	</form>
-	<!-- MDB -->
+<section class="container-fluid mx-0 p-0" ng-app="homeApp" >
+<script>
+var array = '${json}';
+</script>
+<div id="main" class="d-flex justify-content-center align-items-center flex-column w-100" ng-controller="homeCtrl" ng-init="initHome()">
+	 <%@ include file="/WEB-INF/views/fragments/header.jspf" %>
+	 <section class="py-0">
+	 <%! Logger logger = LoggerFactory.getLogger(this.getClass()); %>
+	 
 	
-	       <!--Modal: modalPush-->
-<div class="modal fade" id="modalPushPrenota" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-aria-hidden="true">
-<div class="modal-dialog modal-notify modal-info" role="document">
-  <!--Content-->
-  <div class="modal-content text-center">
-    <!--Header-->
-    <div class="modal-header d-flex justify-content-center">
-      <p class="heading">Attenzione!</p>
+	
+	 <div class="container-fluid w-100 h-100 p-0" id="c">
+
+  <div class="row px-0 py-0 ts" id="r">
+  <c:choose>
+	 <c:when test="${data.size() > 0}">
+	 
+	 <c:forEach items="${data}" var="meta" >
+	 
+	  <div class="col-12 ts z-1">
+      <div class="card h-100 w-100 ts ">
+        <div class="card-header d-flex flex-column position-sticky w-50 mx-30 my-20" *ngIf="true">
+          <div class="d-flex align-items-center justify-content-between py-1">
+              <h2 class="card-title"><c:out value = "${meta.nome}"/></h2>
+              <button id="mSel"type="button" class="btn btn-trasparent p-1" (click)="selectMeta(meta)">
+
+                <span class="d-flex align-items-center justify-content-center">
+                  <i class="fa-solid fa-arrow-right fa-2xl h-100 w-100"></i>
+                  <!--
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#444444" class="bi bi-arrow-right-circle" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+                </svg>
+                -->
+              </span>
+              </button>
+          </div>
+        </div>
+<!--
+        <img class="card-img-top w-100 img-fluid z-1" [src]="getMetaImgUrl(meta)" alt="Card image cap" >
+-->
+<div class="w-100 ts middle"></div>
+        <div class="card-body z-3 d-flex flex-column align-items-center w-100 justify-content-center">
+          <p class="card-text w-50"><c:out value = "${meta.descrizione}"/></p>
+        </div>
+        <div class="card-footer z-3 d-flex align-items-center flex-column w-100 justify-content-center" *ngIf="user">
+
+          <button class="btn btn-otlline-success p-1 text-white px-4 py-2 d-flex align-items-center" (click)="mostraPacchetti(meta)">
+            <span class="mx-2">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#209dd8" class="bi bi-backpack4" viewBox="0 0 16 16">
+                <path d="M4 9.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5v-4Zm1 .5v3h6v-3h-1v.5a.5.5 0 0 1-1 0V10H5Z"/>
+                <path d="M8 0a2 2 0 0 0-2 2H3.5a2 2 0 0 0-2 2v1c0 .52.198.993.523 1.349A.5.5 0 0 0 2 6.5V14a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V6.5a.5.5 0 0 0-.023-.151c.325-.356.523-.83.523-1.349V4a2 2 0 0 0-2-2H10a2 2 0 0 0-2-2Zm0 1a1 1 0 0 0-1 1h2a1 1 0 0 0-1-1ZM3 14V6.937c.16.041.327.063.5.063h4v.5a.5.5 0 0 0 1 0V7h4c.173 0 .34-.022.5-.063V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1Zm9.5-11a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1h-9a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h9Z"/>
+              </svg>
+            </span ><span class="mx-2">Pacchetto vacanza</span></button>
+
+            <app-pacchetti [meta] = "meta" (emitter)="checks.set(meta.id,$event)" *ngIf="checks.get(meta.id)" class="w-100"></app-pacchetti>
+        </div>
+      </div>
     </div>
-
-    <!--Body-->
-    <div class="modal-body">
-
-      <i class="fas fa-bell fa-4x animated rotateIn mb-4"></i>
-
-      <p>Sicuro di voler procedere con la prenotazione?</p>
-
+    </c:forEach>
+    </c:when>
+     <c:otherwise>
+        <h1>Lista vuota</h1>
+    </c:otherwise>
+    </c:choose>
     </div>
-    
-    <!--Footer-->
-    <div class="modal-footer flex-center">
-      <a  class="btn btn-info" data-mdb-dismiss="modal">Conferma</a>
-      <a type="button" class="btn btn-outline-info waves-effect" data-mdb-dismiss="modal">Annulla</a>
     </div>
-  </div>
-  <!--/.Content-->
+	 </section>
+	  <%@ include file="/WEB-INF/views/fragments/footer.jspf" %>
 </div>
-</div>
-
+</section>
 </body>
 </html>

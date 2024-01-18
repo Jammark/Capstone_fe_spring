@@ -13,7 +13,7 @@
 <%@ include file="/WEB-INF/views/fragments/head.jspf" %>
 <spring:url value="/resources/css/login.css" var="crunchifyCSS" />
 <link rel="stylesheet" href="<c:url value="/resources/assets/css/login.css" />"/>
-<script src="/webjars/bootstrap/dist/js/bootstrap.esm.min.js"></script>
+<script src="<c:url value="/webjars/bootstrap/5.3.2/js/bootstrap.min.js" />"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.1/angular.min.js"></script>
 <script type="module" src="<c:url value="/resources/assets/js/login.js" />"></script>
 <script type="text/javascript" src="<c:url value="/resources/assets/js/warning.js" />"></script>
@@ -42,7 +42,7 @@ if(request.getAttribute("logged") != null){
   
 <jsp:setProperty property="*" name="obj"/>  
 <section class="container" ng-app="loginApp">
-<div id="main" class="d-flex justify-content-center align-items-center" ng-controller="loginCtrl" ng-init="initLogin()">
+<div id="main" class="d-flex justify-content-center align-items-center" ng-controller="loginCtrl" ng-init="initLogin('<%=request.getContextPath()%>')">
 <%@ include file="/WEB-INF/views/fragments/warning.jspf" %>
   <div>
     <form>
@@ -60,8 +60,7 @@ if(request.getAttribute("logged") != null){
       <a  href="register" class="active">Registrati</a>
     </div>
   </div>
-</div>
-</section>
+
               <!--Modal: modalPush-->
               <div class="modal fade" id="modalSuccess" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
               aria-hidden="true">
@@ -85,7 +84,7 @@ if(request.getAttribute("logged") != null){
                   <!--Footer-->
                   <div class="modal-footer flex-center">
 
-                    <a type="button" class="btn btn-outline-info waves-effect"  data-bs-dismiss="modal" >OK</a>
+                    <a type="button" class="btn btn-outline-info waves-effect"  data-bs-dismiss="modal" ng-click ="navHome()">OK</a>
                   </div>
                 </div>
                 <!--/.Content-->
@@ -93,7 +92,8 @@ if(request.getAttribute("logged") != null){
               </div>
               <!--Modal: modalPush-->
 
-
+</div>
+</section>
 
 </body>
 </html>

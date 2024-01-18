@@ -15,6 +15,7 @@
 
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<mvc:annotation-driven />
+	
 	<!--  
 	<context:annotation-config/>
 	<context:spring-configured/>
@@ -22,8 +23,9 @@
 	<context:component-scan base-package="capstone.fe.spring" />
 	
 	<mvc:resources mapping="/resources/**" location="/resources/" /> 
+	<!--  
 <mvc:resources mapping="/webjars/**" location="/webjars/"/>
-	
+	-->
 	<mvc:default-servlet-handler/>
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 

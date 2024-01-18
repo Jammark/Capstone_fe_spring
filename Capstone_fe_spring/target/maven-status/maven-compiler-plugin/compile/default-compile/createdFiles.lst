@@ -1,6 +1,7 @@
-capstone/fe/spring/controller/LoginController.class
-capstone/fe/spring/conf/AppConfig.class
 capstone/fe/spring/model/User.class
-capstone/fe/spring/controller/HomeController.class
 capstone/fe/spring/servlet/LoginServlet.class
 capstone/fe/spring/model/LoginRequest.class
+capstone/fe/spring/controller/LoginController.class
+capstone/fe/spring/conf/AppConfig.class
+capstone/fe/spring/conf/SpringApplicationContextListener.class
+capstone/fe/spring/controller/HomeController.class

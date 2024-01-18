@@ -1,0 +1,60 @@
+img {
+  height: 30px;
+  width: 30px;
+  object-fit: cover;
+}
+
+.navbar {
+  background-color: #37517e;
+}
+
+.navbar-collapse {
+  background-color: #37517e;
+  border: 6px white solid;
+  border-radius: 1.2rem;
+  border-top: none;
+}
+
+.collapse .nav-link.active {
+  color: #209dd8;
+}
+.collapse .nav-link.active span {
+  background-color: #209dd8 !important;
+  color: white !important;
+}
+
+.collapse .nav-link:hover span {
+  background-color: #209dd8 !important;
+  color: white !important;
+}
+
+.collapse .nav-link span {
+  font-size: 0.7rem;
+}
+
+img {
+  height: 80px;
+  width: auto;
+}
+
+.btn {
+  color: #209dd8;
+}
+.btn i {
+  color: #209dd8;
+}
+
+#fa {
+  display: inline-block;
+  font-size: 22px;
+}
+
+/*
+.badge{
+  position: absolute;
+  top: -6px;
+  right: -10px;
+}
+*/
+
+/*# sourceMappingURL=header.css.map */

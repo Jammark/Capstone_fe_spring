@@ -147,6 +147,12 @@
 			
 			
     </plugins>
+    
+     <resources>
+        <resource>
+            <directory>src/main/resources</directory>
+        </resource>
+    </resources>
   </build>
   
   	<!-- Add Spring Web and MVC dependencies -->
@@ -283,6 +289,12 @@ isn't compatible with Java 17' -->
 	<groupId>org.springframework</groupId>
 	<artifactId>spring-webmvc</artifactId>
 	<version>5.3.29</version>
+	<exclusions>
+        <exclusion>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+        </exclusion>
+    </exclusions>
 </dependency>
 <!--
 <dependency>
@@ -347,23 +359,24 @@ isn't compatible with Java 17' -->
     <version>2.15.0</version>
 </dependency>
 
-  
+  <!---->
 	  <dependency>
     <groupId>org.slf4j</groupId>
     <artifactId>slf4j-api</artifactId>
-    <version>2.0.7</version>
+    <version>2.0.11</version>
 </dependency>
 
+<!---->
 <dependency>
     <groupId>ch.qos.logback</groupId>
     <artifactId>logback-core</artifactId>
-    <version>1.4.8</version>
+    <version>1.4.14</version>
 </dependency>
 
 <dependency>
     <groupId>ch.qos.logback</groupId>
     <artifactId>logback-classic</artifactId>
-    <version>1.4.8</version>
+    <version>1.4.14</version>
   <!--  <scope>test</scope>-->
 </dependency>
 
@@ -374,6 +387,21 @@ isn't compatible with Java 17' -->
     <version>1.18.28</version>
     <scope>provided</scope>
 </dependency>
+
+<!-- https://mvnrepository.com/artifact/org.webjars/jquery -->
+<dependency>
+    <groupId>org.webjars</groupId>
+    <artifactId>jquery</artifactId>
+    <version>3.7.1</version>
+</dependency>
+
+<dependency>
+    <groupId>org.webjars.npm</groupId>
+    <artifactId>mdbootstrap</artifactId>
+    <version>4.20.0</version>
+</dependency>
+
+
 
 <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations -->
 

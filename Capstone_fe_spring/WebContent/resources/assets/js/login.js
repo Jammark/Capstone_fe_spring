@@ -27,6 +27,30 @@ function showModal(){
       myModal.show();
 }
 
+function post(path, params, method='post') {
+
+  // The rest of this code assumes you are not using a library.
+  // It can be made less verbose if you use one.
+  const form = document.createElement('form');
+  form.method = method;
+  form.action = path;
+ 
+
+  for (const key in params) {
+    if (params.hasOwnProperty(key)) {
+      const hiddenField = document.createElement('input');
+      hiddenField.type = 'hidden';
+      hiddenField.name = key;
+      hiddenField.value = params[key];
+
+      form.appendChild(hiddenField);
+    }
+  }
+
+  document.body.appendChild(form);
+  form.submit();
+}
+
 var app = angular.module('loginApp', []);
 app.controller('loginCtrl', function($scope, $http){
 	
@@ -38,6 +62,8 @@ app.controller('loginCtrl', function($scope, $http){
 		
 		$http.post('http://localhost:3018/auth/login', {'email': $scope.un.value, 'password':$scope.pw.value})
 		.success(function(data){
+			$scope.data = data;
+			$scope.data.user['token'] = data.accessToken;
 			showModal();
 		}).error(function(error){
 			console.log(error);
@@ -46,9 +72,18 @@ app.controller('loginCtrl', function($scope, $http){
 		});
 	};
 	
-	$scope.initLogin = function(){
+	$scope.initLogin = function(name){
 		$scope.un = document.getElementById('email');
 		$scope.pw = document.getElementById('password');
+		$scope.name = name;
+		console.log('app name:'+name);
+	};
+	
+	$scope.navHome = function(){
+		console.log('nav home');
+		console.table($scope.data['user']);
+		post($scope.name+"/home",$scope.data['user'] );
+	
 	};
 	
 });
