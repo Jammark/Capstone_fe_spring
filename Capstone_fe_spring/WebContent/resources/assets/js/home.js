@@ -22,7 +22,7 @@ app.controller('homeCtrl', function($scope, $http){
  $scope.load = function(){
 	console.log('load');
 	 let h = window.innerHeight;
-    let hc = document.getElementById('c').offsetTop +document.getElementsByTagName('nav')[0].offsetHeight;//document.getElementById('c')!.offsetHeight;
+    let hc = document.getElementById('c').offsetTop +document.getElementsByTagName('nav')[0].offsetHeight+ document.getElementById('hero').offsetHeight;//document.getElementById('c')!.offsetHeight;
 //    window.onload = () => {
     document.addEventListener("scroll", (event) => {
       let lastKnownScrollPosition = window.scrollY;
@@ -30,7 +30,7 @@ app.controller('homeCtrl', function($scope, $http){
 
 
       let current = $scope.scroll.get(index) ? $scope.scroll.get(index): false;
-      let val = lastKnownScrollPosition + h > target.offsetTop +hc;
+      let val = lastKnownScrollPosition + h > target.offsetTop +hc - target.offsetHeight;
       //lastKnownScrollPosition + h > target!.offsetTop + target!.offsetHeight && lastKnownScrollPosition > target!.offsetTop;
       $scope.scroll.set(index, val);
 
@@ -45,8 +45,8 @@ app.controller('homeCtrl', function($scope, $http){
 
       if(val && lastKnownScrollPosition + h < target.offsetTop + target.offsetHeight){
         let header = target.getElementsByClassName('card-header')[0] ;
-        let msr = (lastKnownScrollPosition - target.offsetTop) / target.offsetHeight - 0.5;
-        header.style.opacity = `${1- 2*Math.abs(msr)}`;
+        let msr = (lastKnownScrollPosition - target.offsetTop -hc) / (target.offsetHeight * 2);
+        header.style.opacity = `${ 2*Math.abs(msr)}`;
       }
     });
   });
@@ -57,7 +57,7 @@ app.controller('homeCtrl', function($scope, $http){
 
 
     let current = $scope.scroll2.get(index) ? $scope.scroll2.get(index): false;
-    let val = lastKnownScrollPosition + h > target.offsetTop + target.offsetHeight +hc;
+    let val = lastKnownScrollPosition + h > target.offsetTop  +hc;
     //lastKnownScrollPosition + h > target!.offsetTop + target!.offsetHeight && lastKnownScrollPosition > target!.offsetTop;
     $scope.scroll2.set(index, val);
 

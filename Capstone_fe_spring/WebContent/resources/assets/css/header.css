@@ -13,10 +13,12 @@ img {
   border: 6px white solid;
   border-radius: 1.2rem;
   border-top: none;
+  border-top-left-radius: 0rem;
+  border-top-right-radius: 0rem;
 }
 
 .collapse .nav-link.active {
-  color: #209dd8;
+  color: #209dd8 !important;
 }
 .collapse .nav-link.active span {
   background-color: #209dd8 !important;

@@ -19,6 +19,7 @@
   top: 170px;
   left: 30px;
   z-index: 1;
+  opacity: 1;
 }
 
 .card-text {

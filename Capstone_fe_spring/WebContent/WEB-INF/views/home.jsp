@@ -27,7 +27,12 @@
 var array = '${json}';
 </script>
 <div id="main" class="d-flex justify-content-center align-items-center flex-column w-100" ng-controller="homeCtrl" ng-init="initHome()">
+
 	 <%@ include file="/WEB-INF/views/fragments/header.jspf" %>
+	
+	 <section class="mt-4 w-100 pb-0">
+	  <%@ include file="/WEB-INF/views/fragments/hero.jspf" %>
+	  </section>
 	 <section class="py-0">
 	 <%! Logger logger = LoggerFactory.getLogger(this.getClass()); %>
 	 
@@ -43,7 +48,7 @@ var array = '${json}';
 	 
 	  <div class="col-12 ts z-1">
       <div class="card h-100 w-100 ts ">
-        <div class="card-header d-flex flex-column position-sticky w-50 mx-30 my-20" *ngIf="true">
+        <div class="card-header d-flex flex-column w-50 mx-5 my-5" *ngIf="true">
           <div class="d-flex align-items-center justify-content-between py-1">
               <h2 class="card-title"><c:out value = "${meta.nome}"/></h2>
               <button id="mSel"type="button" class="btn btn-trasparent p-1" (click)="selectMeta(meta)">
