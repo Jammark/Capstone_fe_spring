@@ -3,8 +3,11 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:util="http://www.springframework.org/schema/util"
+	  xmlns:aop="http://www.springframework.org/schema/aop"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
 		http://www.springframework.org/schema/util
 		http://www.springframework.org/schema/util/spring-util-3.2.xsd
 		http://www.springframework.org/schema/context
@@ -15,5 +18,9 @@
 	<context:annotation-config/>
 	<context:spring-configured/>
 	<bean id="mapper" class="com.fasterxml.jackson.databind.ObjectMapper"></bean>
+	
+	<bean id="authData"    class="capstone.fe.spring.model.UserWrapper" scope="session">     
+      <aop:scoped-proxy/>
+  </bean>
 	
 </beans>

@@ -41,7 +41,7 @@
               <li class="nav-item">
                   <a *ngIf="user"
                       class="nav-link <%=this.isActive("mete")%> "
-                      href="/mete"
+                      href="<%=request.getContextPath() + "/mete"%>"
                       
                       >Mete Turistiche</a>
 

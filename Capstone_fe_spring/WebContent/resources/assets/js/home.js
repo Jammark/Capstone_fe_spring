@@ -4,7 +4,7 @@ app.controller('homeCtrl', function($scope, $http){
 	
 	
 	$scope.initHome = function(data){
-		$scope.count = 5;
+		$scope.count = count;
 		$scope.scroll = new Map();
 		$scope.scroll2 = new Map();
 		setTimeout($scope.load, 1000);

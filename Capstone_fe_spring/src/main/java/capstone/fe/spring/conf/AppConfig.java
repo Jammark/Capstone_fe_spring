@@ -2,9 +2,11 @@ package capstone.fe.spring.conf;
 
 import java.util.List;
 
+import org.springframework.beans.factory.config.CustomScopeConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.SimpleThreadScope;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.validation.Validator;
@@ -44,6 +46,20 @@ public class AppConfig implements WebMvcConfigurer {
 				.registerModule(module);
 	}
 
+	@Bean
+	public CustomScopeConfigurer customScopeConfigurer() {
+		CustomScopeConfigurer configurer = new CustomScopeConfigurer();
+		configurer.addScope("session", new SimpleThreadScope());
+		return configurer;
+	}
+
+	/*
+	 * @Bean
+	 * 
+	 * @Scope(value = WebApplicationContext.SCOPE_SESSION, proxyMode =
+	 * ScopedProxyMode.TARGET_CLASS) public UserWrapper getAuthData() { return new
+	 * UserWrapper(); }
+	 */
 	/*
 	 * @Bean public SpringApplicationContextListener getListener() { return new
 	 * SpringApplicationContextListener(); }

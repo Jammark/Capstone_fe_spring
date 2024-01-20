@@ -1,0 +1,30 @@
+.card-body {
+  left: 10px;
+  top: 10px;
+}
+.card-body .card-title {
+  font-size: 1.3rem;
+}
+
+.txt-c {
+  color: #33b5e5;
+}
+
+.card {
+  height: 250px;
+  cursor: pointer;
+}
+
+img {
+  object-fit: cover;
+}
+
+#main2 {
+  min-height: 100vh;
+}
+
+.fade:not(.show) {
+  display: none;
+}
+
+/*# sourceMappingURL=mete.css.map */

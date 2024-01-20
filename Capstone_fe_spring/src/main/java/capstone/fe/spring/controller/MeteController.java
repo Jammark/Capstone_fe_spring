@@ -1,7 +1,5 @@
 package capstone.fe.spring.controller;
 
-import java.text.DateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.ExecutionException;
@@ -13,7 +11,6 @@ import org.asynchttpclient.Dsl;
 import org.asynchttpclient.Request;
 import org.asynchttpclient.Response;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,16 +20,15 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import capstone.fe.spring.model.Città;
+import capstone.fe.spring.model.Destinazione;
 import capstone.fe.spring.model.MetaImgWrapper;
-import capstone.fe.spring.model.Prenotazione;
 import capstone.fe.spring.model.User;
 import capstone.fe.spring.model.UserWrapper;
 import lombok.extern.slf4j.Slf4j;
 
-
 @Controller
 @Slf4j
-public class HomeController {
+public class MeteController {
 
 	@Autowired
 	private ObjectMapper mapper;
@@ -40,30 +36,12 @@ public class HomeController {
 	@Autowired
 	private UserWrapper authData;
 
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
-		log.info("Home Page Requested, locale = " + locale);
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+	@RequestMapping(value = "/mete", method = RequestMethod.GET)
+	public String mete(Locale locale, Model model) {
+		log.info("Mete Page Requested, locale = " + locale);
 
-		String formattedDate = dateFormat.format(date);
-
-		model.addAttribute("serverTime", formattedDate);
-
-		return "home";
-	}
-
-	@RequestMapping(value = "/home", method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-	public String user(User user, Model model) {
-		log.info("User Page Requested");
-		log.info(user.toString());
-		model.addAttribute("user", user);
-		this.authData.setUser(user);
 		AsyncHttpClient client = Dsl.asyncHttpClient();
-
+		User user = this.authData.getUser();
 
 		Request getRequest = Dsl.get("http://localhost:3018/mete/città").setHeader("Content-Type", "application/json")
 				.setHeader("Accept", "application/json").setHeader("Authorization", "Bearer " + user.getToken())
@@ -75,17 +53,42 @@ public class HomeController {
 			Response res = responseFuture.get();
 			boolean result = res.getStatusCode() == 200;
 
-			addCartCount(model, client, user.getToken());
-
 			if (result) {
 				List<Città> l = mapper.readValue(res.getResponseBody(), new TypeReference<List<Città>>() {
 				});
-				model.addAttribute("data", l);
-				List<MetaImgWrapper> imgs = l.stream().map(Città::getImgUrl).map(MetaImgWrapper::new)
-						.collect(Collectors.toList());
-				model.addAttribute("json", mapper.writeValueAsString(imgs));
+				model.addAttribute("città", l);
+
 				log.info("" + l);
-				log.info("" + mapper.writeValueAsString(imgs));
+
+
+				getRequest = Dsl.get("http://localhost:3018/mete/destinazioni")
+						.setHeader("Content-Type", "application/json").setHeader("Accept", "application/json")
+						.setHeader("Authorization", "Bearer " + user.getToken()).setRequestTimeout(4000).build();
+
+				responseFuture = client.executeRequest(getRequest);
+				res = responseFuture.get();
+				result = res.getStatusCode() == 200;
+
+				if (result) {
+
+					List<Destinazione> l1 = mapper.readValue(res.getResponseBody(),
+							new TypeReference<List<Destinazione>>() {
+							});
+					log.info("" + l1);
+					model.addAttribute("destinazioni", l1);
+					List<MetaImgWrapper> imgs = l.stream().map(Città::getImgUrl)
+							.map(s -> "http://localhost:3018/mete/image/".concat(s)).map(MetaImgWrapper::new)
+							.collect(Collectors.toList());
+					List<MetaImgWrapper> imgs2 = l1.stream().map(Destinazione::getImgUrl)
+							.map(s -> "http://localhost:3018/mete/image/".concat(s)).map(MetaImgWrapper::new)
+							.collect(Collectors.toList());
+
+					model.addAttribute("imgC", imgs);
+					model.addAttribute("imgD", imgs2);
+				} else {
+					log.info("empty code:" + res.getStatusCode());
+					model.addAttribute("data", "empty");
+				}
 			} else {
 				log.info("empty");
 				model.addAttribute("data", "empty");
@@ -108,22 +111,7 @@ public class HomeController {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			return "home";
+			return "mete";
 		}
-
-	}
-
-	private void addCartCount(Model model, AsyncHttpClient client, String token) throws Exception {
-		Request getRequest = Dsl.get("http://localhost:3018/prenotazioni/saldo")
-				.setHeader("Content-Type", "application/json")
-				.setHeader("Accept", "application/json").setHeader("Authorization", "Bearer " + token)
-				.setRequestTimeout(4000).build();
-
-		Future<Response> responseFuture = client.executeRequest(getRequest);
-		Response res = responseFuture.get();
-		List<Prenotazione> l = mapper.readValue(res.getResponseBody(), new TypeReference<List<Prenotazione>>() {
-		});
-
-		model.addAttribute("count", l.size());
 	}
 }

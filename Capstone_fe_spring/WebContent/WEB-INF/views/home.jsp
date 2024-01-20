@@ -25,6 +25,7 @@
 <section class="container-fluid mx-0 p-0" ng-app="homeApp" >
 <script>
 var array = '${json}';
+var count = '${count}';
 </script>
 <div id="main" class="d-flex justify-content-center align-items-center flex-column w-100" ng-controller="homeCtrl" ng-init="initHome()">
 

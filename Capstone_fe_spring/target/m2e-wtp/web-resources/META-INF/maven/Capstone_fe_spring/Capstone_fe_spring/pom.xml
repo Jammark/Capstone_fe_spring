@@ -401,6 +401,12 @@ isn't compatible with Java 17' -->
     <version>4.20.0</version>
 </dependency>
 
+<dependency>
+    <groupId>org.webjars.bowergithub.mdbootstrap</groupId>
+    <artifactId>mdb-ui-kit</artifactId>
+    <version>5.0.0</version>
+</dependency>
+
 
 
 <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations -->
