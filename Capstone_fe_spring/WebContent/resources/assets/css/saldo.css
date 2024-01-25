@@ -1,0 +1,17 @@
+@import url(index.css);
+#topSaldo {
+  background-image: url("../../assets/imgs/prova_bg.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 100vh;
+}
+#topSaldo .card-header {
+  opacity: 1 !important;
+}
+#topSaldo i {
+  color: #209dd8;
+  height: 30px;
+  width: 30px;
+}
+
+/*# sourceMappingURL=saldo.css.map */

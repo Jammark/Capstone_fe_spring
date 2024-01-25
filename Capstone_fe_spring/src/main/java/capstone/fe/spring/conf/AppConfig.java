@@ -2,6 +2,7 @@ package capstone.fe.spring.conf;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.CustomScopeConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -30,6 +31,9 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 //@ComponentScan(basePackages = "capstone.fe.spring.servlet")
 public class AppConfig implements WebMvcConfigurer {
 
+	@Value("${baseUrl}")
+	private String baseUrl;
+
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/webjars/**").addResourceLocations("/webjars/").resourceChain(false);
@@ -51,6 +55,16 @@ public class AppConfig implements WebMvcConfigurer {
 		CustomScopeConfigurer configurer = new CustomScopeConfigurer();
 		configurer.addScope("session", new SimpleThreadScope());
 		return configurer;
+	}
+
+	@Bean
+	public LogedInterceptor myInterceptor() {
+		return new LogedInterceptor();
+	}
+
+	@Bean(name = "baseUrl")
+	public String getBaseUrl() {
+		return this.baseUrl;
 	}
 
 	/*
@@ -119,7 +133,7 @@ public class AppConfig implements WebMvcConfigurer {
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		// TODO Auto-generated method stub
+		// registry.addInterceptor(myInterceptor());
 
 	}
 

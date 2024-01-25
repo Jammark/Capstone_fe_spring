@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false"%>
-<%@ page import=" org.slf4j.Logger, org.slf4j.LoggerFactory"%>
+<%@ page import=" org.slf4j.Logger, org.slf4j.LoggerFactory, capstone.fe.spring.model.Città, java.util.List"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -108,13 +108,13 @@
       <c:forEach items="${città}" var="city" varStatus="loop">
 
         <div class="col-lg-3 col-md-4" >
-          <div class="card position-relative" (click)="selezionaCity(city)">
+          <a class="card position-relative" href="<%= request.getContextPath() + "/city/" %>${città.get(loop.index).getId()}">
             <img class="card-img-top w-100 img-fluid z-1 w-100 h-100" src="${imgC.get(loop.index).getImg()} " alt="Card image cap" >
             <div class="card-body flex-column position-absolute z-1 align-items-start p-0">
                 <h2 class="card-title p-2 rounded bg-white txt-c"><c:out value = "${city.nome}"/></h2>
                 <h2 class="card-title p-2 rounded bg-white"><span><c:out value = "${city.numHotels}"/></span><span class="txt-c"> Hotel</span></h2>
             </div>
-          </div>
+          </a>
         </div>
       </c:forEach>
     </div>
@@ -131,12 +131,12 @@
         <div class="row px-0 py-0 ts gy-3">
       <c:forEach items="${destinazioni}" var="dest" varStatus="loop">
         <div class="col-lg-3 col-md-4" >
-          <div class="card position-relative " (click)="selezionaDest(dest)">
+          <a class="card position-relative " href="<%= request.getContextPath() + "/dest/" %>${destinazioni.get(loop.index).getId()}">
             <img class="card-img-top w-100 img-fluid z-1 w-100 h-100" src="${imgD.get(loop.index).getImg()} " alt="Card image cap" >
             <div class="card-body flex-column position-absolute z-1 align-items-start p-0">
                 <h2 class="card-title p-2 rounded bg-white txt-c"><c:out value = "${dest.nome}"/></h2>
             </div>
-          </div>
+          </a>
         </div>
 
      

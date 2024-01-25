@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAQ,qFAA6E;AAC7E,sBAAW;AACnB,CAAC;EACC,KAAK,EAAE,OAAO;;;AAGhB,SAAU;EAER,KAAK,EAAE,IAAI;;;AAGb,WAAY;EACV,UAAU,EAAE,OAAO;;;AAErB,KAAK;EACH,OAAO,EAAE,YAAY;EACrB,MAAM,EAAE,IAAI;EACZ,KAAK,EAAE,IAAI;EACX,UAAU,EAAE,OAAO;;;AAGrB,UAAU;EACR,WAAW,EAAE,yBAAyB;EACtC,cAAc,EAAE,KAAK",
+"sources": ["../../../../src/main/sass/dest.scss"],
+"names": [],
+"file": "dest.css"
+}

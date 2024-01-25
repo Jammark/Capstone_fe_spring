@@ -1,0 +1,19 @@
+#topR {
+  background-image: url("../../assets/imgs/riepbg.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 100vh;
+}
+#topR h4 {
+  font-size: 1.2rem;
+}
+#topR h2 {
+  font-size: 1.4rem;
+}
+#topR i {
+  color: #209dd8;
+  height: 30px;
+  width: 30px;
+}
+
+/*# sourceMappingURL=riepilogo.css.map */

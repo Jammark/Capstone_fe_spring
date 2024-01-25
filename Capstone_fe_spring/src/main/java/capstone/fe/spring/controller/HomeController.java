@@ -13,6 +13,7 @@ import org.asynchttpclient.Dsl;
 import org.asynchttpclient.Request;
 import org.asynchttpclient.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,10 +41,12 @@ public class HomeController {
 	@Autowired
 	private UserWrapper authData;
 
+	@Value("${baseUrl}")
+	private String baseUrl;
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		log.info("Home Page Requested, locale = " + locale);
 		Date date = new Date();
@@ -52,8 +55,10 @@ public class HomeController {
 		String formattedDate = dateFormat.format(date);
 
 		model.addAttribute("serverTime", formattedDate);
-
-		return "home";
+		model.addAttribute("baseUrl", baseUrl);
+		User user = this.authData.getUser();
+		model.addAttribute("user", user);
+		return loadData(user, model);
 	}
 
 	@RequestMapping(value = "/home", method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
@@ -61,11 +66,18 @@ public class HomeController {
 		log.info("User Page Requested");
 		log.info(user.toString());
 		model.addAttribute("user", user);
+		model.addAttribute("baseUrl", baseUrl);
 		this.authData.setUser(user);
+
+		return loadData(user, model);
+	}
+
+	private String loadData(User user, Model model) {
 		AsyncHttpClient client = Dsl.asyncHttpClient();
 
 
-		Request getRequest = Dsl.get("http://localhost:3018/mete/città").setHeader("Content-Type", "application/json")
+		Request getRequest = Dsl.get("http://localhost:3018/mete/città/most_rated")
+				.setHeader("Content-Type", "application/json")
 				.setHeader("Accept", "application/json").setHeader("Authorization", "Bearer " + user.getToken())
 				.setRequestTimeout(4000).build();
 
@@ -110,7 +122,6 @@ public class HomeController {
 			}
 			return "home";
 		}
-
 	}
 
 	private void addCartCount(Model model, AsyncHttpClient client, String token) throws Exception {

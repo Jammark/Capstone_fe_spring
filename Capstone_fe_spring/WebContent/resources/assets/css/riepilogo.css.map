@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAEA,KAAK;EACH,gBAAgB,EAAE,mCAAmC;EACrD,iBAAiB,EAAE,SAAS;EAC5B,eAAe,EAAE,KAAK;EACrB,UAAU,EAAE,KAAK;;AAEjB,QAAE;EACH,SAAS,EAAE,MAAM;;AAGnB,QAAE;EACA,SAAS,EAAE,MAAM;;AAGnB,OAAC;EACC,KAAK,EAAE,OAAO;EACd,MAAM,EAAE,IAAI;EACZ,KAAK,EAAE,IAAI",
+"sources": ["../../../../src/main/sass/riepilogo.scss"],
+"names": [],
+"file": "riepilogo.css"
+}

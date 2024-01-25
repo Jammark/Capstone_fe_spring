@@ -24,6 +24,7 @@
 <body>
 <section class="container-fluid mx-0 p-0" ng-app="homeApp" >
 <script>
+var baseUrl = '${baseUrl}';
 var array = '${json}';
 var count = '${count}';
 </script>

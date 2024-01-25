@@ -60,7 +60,7 @@ app.controller('loginCtrl', function($scope, $http){
 		console.log($scope.un.value);
 		console.log($scope.pw.value);
 		
-		$http.post('http://localhost:3018/auth/login', {'email': $scope.un.value, 'password':$scope.pw.value})
+		$http.post($scope.baseUrl +'auth/login', {'email': $scope.un.value, 'password':$scope.pw.value})
 		.success(function(data){
 			$scope.data = data;
 			$scope.data.user['token'] = data.accessToken;
@@ -76,7 +76,12 @@ app.controller('loginCtrl', function($scope, $http){
 		$scope.un = document.getElementById('email');
 		$scope.pw = document.getElementById('password');
 		$scope.name = name;
+		$scope.baseUrl = baseUrl;
 		console.log('app name:'+name);
+		if(loggedMsg){
+			$scope.errorMsg = loggedMsg;
+			showWarning();
+		}
 	};
 	
 	$scope.navHome = function(){

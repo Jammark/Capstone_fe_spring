@@ -23,9 +23,9 @@
 	<context:component-scan base-package="capstone.fe.spring" />
 	
 	<mvc:resources mapping="/resources/**" location="/resources/" /> 
-	<!--  
+	<!--  	-->
 <mvc:resources mapping="/webjars/**" location="/webjars/"/>
-	-->
+
 	<mvc:default-servlet-handler/>
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
@@ -38,4 +38,18 @@
 <!-- 
 <bean id="mapper" class="com.fasterxml.jackson.databind.ObjectMapper"></bean>
  -->
+  
+  
+  <mvc:interceptors>
+ <mvc:interceptor>
+   <mvc:mapping path="/home" />
+    <mvc:mapping path="/saldo" />
+     <mvc:mapping path="/riepilogo" />
+      <mvc:mapping path="/mete" />
+       <mvc:mapping path="/city" />
+          <mvc:mapping path="/dest" />
+   <bean id="logedInterceptor" class="capstone.fe.spring.conf.LogedInterceptor" />
+ </mvc:interceptor>
+</mvc:interceptors> 
+  
 </beans>

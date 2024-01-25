@@ -38,6 +38,8 @@
 <link rel="stylesheet" href="<c:url value="/resources/assets/css/footer.css" />"/>
 <script type="module" src="<c:url value="/resources/assets/js/header.js" />"></script>
 
+<link rel="stylesheet" href="<c:url value="/webjars/font-awesome/6.5.1/css/all.min.css" />"/>
+
 <!--Template-->
 
  <!-- Favicons -->

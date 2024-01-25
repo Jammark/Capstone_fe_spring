@@ -9,7 +9,7 @@
 <head>
 <title>Login</title>
 
-<meta charset="UTF-8">
+
 <%@ include file="/WEB-INF/views/fragments/head.jspf" %>
 <spring:url value="/resources/css/login.css" var="crunchifyCSS" />
 <link rel="stylesheet" href="<c:url value="/resources/assets/css/login.css" />"/>
@@ -21,15 +21,21 @@
 
 </head>
 <body>
-
+<script>
+	console.log('${baseUrl}');
+	var baseUrl = '${baseUrl}';
+	var loggedMsg;
+</script>
 <%
-if(request.getAttribute("logged") != null){
-	Boolean logged = (Boolean)request.getAttribute("logged");
+if(request.getParameter("notlogged") != null){
+	Boolean logged = Boolean.valueOf(request.getParameter("notlogged"));
 	if(logged){%>
-	<script type="text/javascript">showModal()</script>
-	<%
-	}else{%>
-	<script type="text/javascript">showWarning()</script>
+	
+	<script type="text/javascript">
+	console.log('not logged in');
+	 loggedMsg = 'Utente non loggato.';
+	
+	</script>
 	
 	<% }
 	

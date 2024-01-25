@@ -11,7 +11,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class Destinazione extends Meta {
 
-	private String cotenutoSecondario, contenutoPrincipale;
+	private String contenutoSecondario, contenutoPrincipale;
 	private Long[] cityIds;
 
 }
