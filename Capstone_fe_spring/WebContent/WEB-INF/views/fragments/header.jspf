@@ -56,7 +56,7 @@
 
               </li>
               <li class="nav-item align-self-end" *ngIf="user">
-                <button type="button" class="btn btn-white float-end" *ngIf="user" data-toggle="modal" data-target="#modalPush"><i class="fa-solid fa-right-from-bracket me-2"></i>Logout</button>
+                <button type="button" class="btn btn-white float-end" *ngIf="user" data-bs-toggle="modal" data-bs-target="#modalPush"><i class="fa-solid fa-right-from-bracket me-2"></i>Logout</button>
               </li>
 
          </ul>
@@ -111,7 +111,7 @@
 
      <!--Footer-->
      <div class="modal-footer flex-center">
-       <a  class="btn btn-info text-white" ng-click="logout()" data-dismiss="modal">Conferma</a>
+       <a  class="btn btn-info text-white" href="<%=request.getContextPath()+ "/logout"%>" data-dismiss="modal">Conferma</a>
        <a type="button" class="btn btn-outline-info waves-effect" data-dismiss="modal">Annulla</a>
      </div>
    </div>

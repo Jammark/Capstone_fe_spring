@@ -155,6 +155,7 @@ public class PrenotazioniController {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			model.addAttribute("error", true);
 		} finally {
 			try {
 				client.close();
@@ -244,7 +245,7 @@ public class PrenotazioniController {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-
+			model.addAttribute("error", true);
 		} finally {
 			try {
 				client.close();

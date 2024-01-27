@@ -28,3 +28,14 @@
                   </div>
                   </div>
                   <!--Modal: modalPush-->
+                  
+                  <script>
+                  var error = false;
+                  <% if(request.getAttribute("error") != null){ %>
+                  		 error = true;
+                  		 var msg = 'Errore di connessione al server.';
+                  <% }else{%>
+                  		error = false;
+                  <%  }%>
+                  
+                  </script>

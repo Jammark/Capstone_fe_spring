@@ -1,19 +1,33 @@
 var app = angular.module('metaApp');
 app.controller('alloggiCtrl', function($scope, $http){
 	
-	
+	 $scope.$emit('childEmit', 'Child calling parent');
+      $scope.$broadcast('siblingAndParent');
 	
 	$scope.initAlloggi = function(){
 		console.table(hotels);
 		console.table(appartamenti);
+		if(!error){
 		$scope.hotels = JSON.parse(hotels);
 		$scope.appartamenti = JSON.parse(appartamenti);
 		setTimeout($scope.load, 1000);
 		$scope.token = token;
+		}
 	};
 	
 	
+	$scope.selezionaHotel = function(index){
+		let h = $scope.hotels[index];
+		$scope.$parent.alloggio = h;
+		$scope.$parent.show = true;
+		console.log('selezione hotel');
+		console.table(h);
+	}
 	
+	$scope.selezionaAppartamento = function(index){
+		let a = $scope.appartamenti[index];
+		$scope.alloggio = a;
+	}
 	
 	
 	 $scope.load = function(){

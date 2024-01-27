@@ -13,6 +13,7 @@
 <%@ include file="/WEB-INF/views/fragments/head.jspf" %>
 
 <link rel="stylesheet" href="<c:url value="/resources/assets/css/city.css" />"/>
+<link rel="stylesheet" href="<c:url value="/resources/assets/css/prenotazione.css" />"/>
 <link rel="stylesheet" href="<c:url value="/resources/assets/css/catalogo-alloggi.css" />"/>
 <link rel="stylesheet" href="<c:url value="/webjars/mdbootstrap/4.20.0/css/mdb.min.css" />"/>
 
@@ -20,6 +21,7 @@
 <script src="<c:url value="/webjars/mdbootstrap/4.20.0/js/mdb.min.js" />"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.1/angular.min.js"></script>
 <script type="module" src="<c:url value="/resources/assets/js/city.js" />"></script>
+<script type="module" src="<c:url value="/resources/assets/js/prenotazione.js" />"></script>
 <script type="module" src="<c:url value="/resources/assets/js/catalogo-alloggi.js" />"></script>
 <script type="text/javascript" src="<c:url value="/resources/assets/js/warning.js" />"></script>
 </head>
@@ -29,11 +31,12 @@
 var baseUrl = '${baseUrl}';
 var hotels = '${jsonH}';
 var appartamenti = '${jsonA}';
+var nc = '${nc}';
 </script>
 <section class="container-fluid mx-0 p-0" ng-app="metaApp" >
 
 <div id="main" class="d-flex justify-content-center align-items-center flex-column w-100" ng-controller="metaCtrl" ng-init="initMeta()">
-
+<%@ include file="/WEB-INF/views/fragments/warning.jspf" %>
  <%@ include file="/WEB-INF/views/fragments/header.jspf" %>
 	
 	 <section class="mt-4 w-100 pb-0">
@@ -59,11 +62,13 @@ var appartamenti = '${jsonA}';
     <div class="col-12 section-title w-100 align-items-center justify-content-center">
       <h2></h2>
     </div>
-    <div class="col-12" *ngIf="alloggio">
+    <section class="col-12" ng-if="check()">
+    
+    <%@ include file="/WEB-INF/views/fragments/prenotazione.jspf" %>
     <!-- 
       <app-prenotazione-helper [nomeArrivo]="city?.nome" [alloggio]="alloggio"></app-prenotazione-helper>
        -->
-    </div>
+    </section>
     <div class="col-12">
     
     <%@ include file="/WEB-INF/views/fragments/catalogo-alloggi.jspf" %>

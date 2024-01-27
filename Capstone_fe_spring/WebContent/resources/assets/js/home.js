@@ -8,13 +8,19 @@ app.controller('homeCtrl', function($scope, $http){
 		$scope.scroll = new Map();
 		$scope.scroll2 = new Map();
 		setTimeout($scope.load, 1000);
-		$scope.imgs = JSON.parse(array);
+		
+		if(error){
+			$scope.errorMsg = msg;
+			showWarning();
+		}else{
+			$scope.imgs = JSON.parse(array);
 		$scope.mete = JSON.parse(mete);
 		$scope.check = new Map();
 		$scope.mete.forEach(m => $scope.check.set(m, false));
 		$scope.pacchetti = JSON.parse(map);
 		$scope.baseUrl = baseUrl;
 		$scope.token = token;
+		}
 	};
 	
 	

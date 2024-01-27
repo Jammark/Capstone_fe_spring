@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.stream.Collectors;
 
@@ -220,17 +219,11 @@ public class HomeController {
 
 			log.info("pacchetti: " + model.getAttribute("pacchetti"));
 
-		} catch (ExecutionException e) {
-			log.info("error");
-			e.printStackTrace();
-			model.addAttribute("data", "empty");
-		} catch (InterruptedException e) {
-			log.info("error");
-			e.printStackTrace();
-			model.addAttribute("data", "empty");
 		} catch (Exception e) {
 			e.printStackTrace();
 			log.info("error");
+
+			model.addAttribute("error", true);
 		} finally {
 			try {
 				client.close();

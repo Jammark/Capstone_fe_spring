@@ -3,7 +3,6 @@ package capstone.fe.spring.controller;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.stream.Collectors;
 
@@ -148,7 +147,7 @@ public class MeteController {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			model.addAttribute("dest", null);
+			model.addAttribute("error", true);
 		} finally {
 			try {
 				client.close();
@@ -184,6 +183,21 @@ public class MeteController {
 				model.addAttribute("city", c);
 				model.addAttribute("img", "http://localhost:3018/mete/image/" + c.getImgUrl());
 				log.info("" + c);
+
+				Request getNCRequest = Dsl.get("http://localhost:3018/mete/città")
+						.setHeader("Content-Type", "application/json").setHeader("Accept", "application/json")
+						.setHeader("Authorization", "Bearer " + user.getToken()).setRequestTimeout(4000).build();
+
+				Future<Response> responseNCFuture = client.executeRequest(getNCRequest);
+
+				res = responseNCFuture.get();
+				result = res.getStatusCode() == 200;
+
+				if (result) {
+					List<String> nc = mapper.readValue(res.getResponseBody(), new TypeReference<List<Città>>() {
+					}).stream().map(Città::getNome).collect(Collectors.toList());
+					model.addAttribute("nc", mapper.writeValueAsString(nc));
+				}
 
 				Request hRequest = Dsl.get("http://localhost:3018/alloggi/hotels/meta/" + metaId)
 						.setHeader("Content-Type", "application/json").setHeader("Accept", "application/json")
@@ -233,7 +247,7 @@ public class MeteController {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			model.addAttribute("dest", "empty");
+			model.addAttribute("error", true);
 		} finally {
 			try {
 				client.close();
@@ -303,17 +317,10 @@ public class MeteController {
 				model.addAttribute("data", "empty");
 			}
 
-		} catch (ExecutionException e) {
-			log.info("error");
-			e.printStackTrace();
-			model.addAttribute("data", "empty");
-		} catch (InterruptedException e) {
-			log.info("error");
-			e.printStackTrace();
-			model.addAttribute("data", "empty");
 		} catch (Exception e) {
 			e.printStackTrace();
 			log.info("error");
+			model.addAttribute("error", true);
 		} finally {
 			try {
 				client.close();

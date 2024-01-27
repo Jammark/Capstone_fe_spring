@@ -4,12 +4,15 @@ import java.util.Locale;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import capstone.fe.spring.model.UserWrapper;
 
 @Controller
 public class LoginController {
@@ -19,6 +22,8 @@ public class LoginController {
 	@Value("${baseUrl}")
 	private String baseUrl;
 
+	@Autowired
+	private UserWrapper authData;
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login(Locale locale, Model model) {
@@ -29,6 +34,13 @@ public class LoginController {
 	@RequestMapping(value = "/login_reset", method = RequestMethod.GET)
 	public String login_reset(Locale locale, Model model, RedirectAttributes ra) {
 		ra.addAttribute("notlogged", true);
+		// this.authData.setUser(null);
+		return "redirect:login";
+	}
+
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String logout(Model model) {
+		this.authData.setUser(null);
 		return "redirect:login";
 	}
 

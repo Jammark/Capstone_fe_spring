@@ -1,0 +1,29 @@
+#prentz .card {
+  border-top: 3px solid #47b2e4;
+  border-bottom: 3px solid #47b2e4;
+}
+#prentz .card .card-header {
+  opacity: 1 !important;
+}
+#prentz label {
+  color: #47b2e4;
+}
+#prentz input, #prentz select {
+  border-right: 3px solid #47b2e4;
+  border-left: 3px solid #47b2e4;
+}
+#prentz .form-outline .form-control ~ .form-label {
+  background-color: white;
+  color: #47b2e4;
+}
+#prentz input[type=number] {
+  border: 1px solid grey !important;
+}
+#prentz .btn-danger i {
+  color: white;
+}
+#prentz .btn-primary i {
+  color: white;
+}
+
+/*# sourceMappingURL=prenotazione.css.map */

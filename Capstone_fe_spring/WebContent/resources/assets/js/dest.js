@@ -5,7 +5,10 @@ app.controller('metaCtrl', function($scope, $http){
 	
 	$scope.initMeta = function(data){
 		$scope.count = 3;
-		
+		if(error){
+			$scope.errorMsg = msg;
+			showWarning();
+		}
 		
 	};
 	

@@ -24,6 +24,7 @@
 <section class="container-fluid mx-0 p-0" ng-app="meteApp" >
 
 <div id="main" class="d-flex justify-content-center align-items-center flex-column w-100" ng-controller="meteCtrl" ng-init="initMete()">
+<%@ include file="/WEB-INF/views/fragments/warning.jspf" %>
  <%@ include file="/WEB-INF/views/fragments/header.jspf" %>
 	
 	 <section class="mt-4 w-100 pb-0">

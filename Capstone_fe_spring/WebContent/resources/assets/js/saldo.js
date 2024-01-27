@@ -5,10 +5,15 @@ app.controller('saldoCtrl', function($scope, $http){
 	
 	$scope.initSaldo = function(){
 		$scope.count = 3;
+		if(!error){
 		$scope.prenotazioni = JSON.parse(json);
 		$scope.token = token;
 		$scope.redirection = redirection;
 		$scope.baseUrl = baseUrl;
+		}else{
+			$scope.errorMsg = msg;
+			showWarning();
+		}
 		
 	};
 	

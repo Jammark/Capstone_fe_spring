@@ -1,0 +1,216 @@
+<div id="prentz" class="col-12" ng-controller="prenotazioneCtrl" ng-init="initPrenotazione()">
+  <div class="row">
+    <div class="col-12">
+      <form #form="ngForm" ng-submit="submit()" class="w-100">
+        <div ngModelGroup="prnt" #prntGroup="ngModelGroup" id="prnt">
+          <div class="py-2 d-flex justify-content-around w-100">
+            <div class="form-group p-2 d-flex flex-column align-items-center flex-fill">
+            <label for="prt">Data partenza:</label>
+
+            <input type="date" id="prt" name="prt" min="2000-01-01" max="2025-12-31" class="w-100 h-100" 
+            ng-model="partenza"
+              required  class="form-control" />
+            </div>
+            <div class="form-group p-2 d-flex flex-column align-items-center flex-fill">
+              <label for="rtrn">Data ritorno:</label>
+
+              <input type="date" id="rtrn" name="rtrn" min="2000-01-01" max="2025-12-31" class="w-100 h-100" 
+               ng-model="ritorno"
+                required  class="form-control"   />
+          </div>
+          <div class="form-group p-2 d-flex flex-column align-items-center flex-fill">
+                <label for="nomeP">Nome città partenza</label>
+
+                <select id="nomeP" class="form-select"
+                name="nomeP"
+                ng-model="nomePartenza"
+                required >
+                  <option ng-repeat="nome in cityNames" value="{{nome}}" >{{nome}}</option>
+
+                </select>
+                <!--
+                <input type="text" id="nomeP" name="nomeP" required [(ngModel)]="nomePartenza" #nomeP>
+       -->
+              </div>
+              <div class="flex-fill d-flex align-items-center justify-content-center">
+                <button type="submit" [disabled]="form.invalid" class="btn btn-primary mt-3"><i class="fa-solid fa-magnifying-glass me-2"></i>Cerca voli</button>
+              </div>
+              </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="col-12 section-title d-flex align-items-center justify-content-center w-100">
+      <h2></h2>
+    </div>
+
+    <div class="col-12 my-4" ng-if="checked">
+    
+     <%@ include file="/WEB-INF/views/fragments/ricerca-trasporto.jspf" %>
+    <!--
+        <app-ricerca-trasporto [titolo]="'Voli andata'" [data]="partenza" [partenza]="nomePartenza" [arrivo]="nomeArrivo" (emitter)="setAndata($event)"></app-ricerca-trasporto>
+      -->
+    </div>
+
+    <div class="col-12 my-4" ng-if="checked">
+    <%@ include file="/WEB-INF/views/fragments/ricerca-trasporto.jspf" %>
+    <!--  
+      <app-ricerca-trasporto [titolo]="'Voli ritorno'" [data]="ritorno" [partenza]="nomeArrivo" [arrivo]="nomePartenza" (emitter)="setRitorno($event)"></app-ricerca-trasporto>
+  
+  	-->
+  </div>
+  <div class="col-12 my-4">
+    <div class="card p-3">
+      <div class="row no-gutters">
+        <div class="col-6">
+      <div class="card-header">
+        <h4 class="card-text my-2 mx-3">Alloggio: {{alloggio.nome}}</h4>
+        <div class="d-flex align-items-center justify-content-between w-100 my-2" ng-if="viaggioAndata">
+          <h4 class="card-text mx-3">Andata: <span class="fs-5">{{viaggioAndata.nome}}</span></h4>
+          <button class="btn btn-danger mx-3" (click)="rimuoviAndata()"><i class="fa-solid fa-trash-can me-2"></i>Rimuovi</button>
+        </div>
+        <div class="d-flex align-items-center justify-content-between w-100 my-2" ng-if="viaggioRitorno">
+          <h4 class="card-text mx-3">Ritorno: <span class="fs-5">{{viaggioRitorno.nome}}</span></h4>
+          <button class="btn btn-danger mx-3" (click)="rimuoviRitorno()"><i class="fa-solid fa-trash-can me-2"></i>Rimuovi</button>
+        </div>
+      </div>
+      </div>
+
+
+
+
+      <div class="col-6">
+        <form #form1="ngForm" ng-submit="submit()" class="w-100">
+        <div class="d-flex w-100 align-items-center justify-content-end p-4 h-100">
+
+          <div ngModelGroup="prnt1" #prnt1Group="ngModelGroup" id="prnt1">
+            <div class="py-2 d-flex justify-content-around w-50 mx-2">
+              <div class="form-group p-2 d-flex flex-column align-items-center flex-fill">
+                <div class="form-outline" style="width: 22rem;">
+                <input mdbInput class="form-control active" id="num" type="number" min="1" [max]="getMaxPosti()" step="1" value="1" name="num" ng-model="numeroPosti"
+                  required #num ="ngModel" >
+                  <label class="form-label" for="num">Numero posti</label>
+                </div>
+                </div>
+            </div>
+          </div>
+
+          <button type="submit" [disabled]="form1.invalid || !this.viaggioAndata || !this.viaggioRitorno" class="btn btn-primary" data-toggle="modal" data-target="#modalPushPrenota"><i class="fa-solid fa-bookmark me-2"></i>Prenota</button><!--(click)="showModal('p')"-->
+        </div>
+      </form>
+      </div>
+    </div>
+    </div>
+</div>
+<div class="col-12 section-title d-flex align-items-center justify-content-center w-100">
+  <h2></h2>
+</div>
+ 
+  </div>
+
+
+</div>
+
+<div class="container">
+  <!-- Modal -->
+ <div class="modal" id="exampleModalp" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+     <div class="modal-dialog">
+       <div class="modal-content">
+         <div class="modal-header">
+           <h5 class="modal-title" id="exampleModalLabel">Attenzione!</h5>
+           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+         </div>
+         <div class="modal-body">
+          <p>Sicuro di voler procedere con la prenotazione?</p>
+         </div>
+         <div class="modal-footer">
+           <button type="button" class="btn btn-secondary" data-dismiss="modal">Annulla</button>
+           <button id="confirm" type="button" class="btn btn-outline-danger" data-bs-dismiss="modal" (click)="prenota()">Conferma</button>
+         </div>
+       </div>
+     </div>
+   </div>
+       </div>
+
+       <!--Modal: modalPush-->
+<div class="modal fade" id="modalPushPrenota" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+aria-hidden="true">
+<div class="modal-dialog modal-notify modal-info" role="document">
+  <!--Content-->
+  <div class="modal-content text-center">
+    <!--Header-->
+    <div class="modal-header d-flex justify-content-center">
+      <p class="heading">Attenzione!</p>
+    </div>
+
+    <!--Body-->
+    <div class="modal-body">
+
+      <i class="fas fa-bell fa-4x animated rotateIn mb-4"></i>
+
+      <p>Sicuro di voler procedere con la prenotazione?</p>
+
+    </div>
+
+    <!--Footer-->
+    <div class="modal-footer flex-center">
+      <a  class="btn btn-info" (click)="prenota()" data-dismiss="modal">Conferma</a>
+      <a type="button" class="btn btn-outline-info waves-effect" data-dismiss="modal">Annulla</a>
+    </div>
+  </div>
+  <!--/.Content-->
+</div>
+</div>
+<!--Modal: modalPush-->
+
+       <div class="container">
+        <!-- Modal -->
+       <div class="modal" id="modalSuccess_" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+           <div class="modal-dialog">
+             <div class="modal-content">
+               <div class="modal-header">
+                 <h5 class="modal-title" id="exampleModalLabel">Complimenti!</h5>
+                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+               </div>
+               <div class="modal-body">
+                <p>Prenotazione avvenuta con successo.</p>
+               </div>
+               <div class="modal-footer">
+
+                 <button id="confirm" type="button" class="btn btn-outline-danger" data-bs-dismiss="modal" (click)="chiudi()">Ok</button>
+               </div>
+             </div>
+           </div>
+         </div>
+             </div>
+
+               <!--Modal: modalPush-->
+<div class="modal fade" id="modalSuccess" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+aria-hidden="true">
+<div class="modal-dialog modal-notify modal-info" role="document">
+  <!--Content-->
+  <div class="modal-content text-center">
+    <!--Header-->
+    <div class="modal-header d-flex justify-content-center">
+      <p class="heading">Complimenti!</p>
+    </div>
+
+    <!--Body-->
+    <div class="modal-body">
+
+      <i class="fas fa-solid fa-thumbs-up fa-4x animated rotateIn mb-4"></i>
+
+      <p>Prenotazione avvenuta con successo.</p>
+
+    </div>
+
+    <!--Footer-->
+    <div class="modal-footer flex-center">
+
+      <a type="button" class="btn btn-outline-info waves-effect"  data-bs-dismiss="modal" (click)="chiudi()">OK</a>
+    </div>
+  </div>
+  <!--/.Content-->
+</div>
+</div>
+<!--Modal: modalPush-->

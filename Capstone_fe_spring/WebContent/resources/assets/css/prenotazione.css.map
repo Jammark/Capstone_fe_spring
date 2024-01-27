@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AACA,aAAK;EACH,UAAU,EAAE,iBAAiB;EAC7B,aAAa,EAAE,iBAAiB;;AAEhC,0BAAY;EACV,OAAO,EAAE,YAAY;;AAIzB,aAAK;EACH,KAAK,EAAC,OAAO;;AAGf,6BAAY;EACV,YAAY,EAAE,iBAAiB;EAC/B,WAAW,EAAE,iBAAiB;;AAGhC,iDAAyC;EACvC,gBAAgB,EAAE,KAAK;EACvB,KAAK,EAAE,OAAO;;AAGhB,0BAAkB;EAChB,MAAM,EAAE,yBAAyB;;AAGnC,qBAAa;EACX,KAAK,EAAE,KAAK;;AAGd,sBAAc;EACZ,KAAK,EAAE,KAAK",
+"sources": ["../../../../src/main/sass/prenotazione.scss"],
+"names": [],
+"file": "prenotazione.css"
+}

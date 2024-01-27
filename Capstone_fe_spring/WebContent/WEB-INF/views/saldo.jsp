@@ -40,7 +40,7 @@ var redirection = '<%=request.getContextPath() + "/riepilogo"%>';
 	  <section class="container-fluid mx-0 p-0" ng-app="saldoApp" >
 
 <div id="main" class="d-flex justify-content-center align-items-center flex-column w-100" ng-controller="saldoCtrl" ng-init="initSaldo()">
-	  
+	  <%@ include file="/WEB-INF/views/fragments/warning.jspf" %>
 	  <div id="topSaldo" class="container-fluid  w-100 h-100 p-4 my-0">
     <div class="row h-100 gy-2">
       <div class="col-12">

@@ -18,15 +18,22 @@
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.1/angular.min.js"></script>
 
 <script type="text/javascript" src="<c:url value="/resources/assets/js/warning.js" />"></script>
+<script type="text/javascript" src="<c:url value="/resources/assets/js/riepilogo.js" />"></script>
 </head>
 <body>
+<section class="mx-0 p-0" ng-app="riepilogoApp" >
+<div id="main" class="d-flex justify-content-center align-items-center flex-column w-100"  ng-controller="riepilogoCtrl" ng-init="initRiepilogo()">
+	  <%@ include file="/WEB-INF/views/fragments/warning.jspf" %>
  <%@ include file="/WEB-INF/views/fragments/header.jspf" %>
 	
 	 <section class="mt-4 w-100 pb-0">
 	  <%@ include file="/WEB-INF/views/fragments/hero.jspf" %>
 	  </section>
 	  
+	    
 	  <div id="topR" class="container-fluid my-0 p-3 h-100">
+	  
+
   <div class="row gy-3">
     <div class="col-12">
       <div class="d-flex w-100 justify-content-center">
@@ -83,8 +90,8 @@
     </div>
   </div>
 </div>
-
-
+</div>
+</section>
 
 	  
 	  

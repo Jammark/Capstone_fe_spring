@@ -67,7 +67,7 @@ app.controller('loginCtrl', function($scope, $http){
 			showModal();
 		}).error(function(error){
 			console.log(error);
-			$scope.errorMsg = error.message;
+			$scope.errorMsg = error ? error.message : 'Errore di connessione al server!';
 			showWarning();
 		});
 	};

@@ -6,7 +6,10 @@ app.controller('meteCtrl', function($scope, $http){
 	$scope.initMete = function(data){
 		$scope.count = 3;
 		
-		
+		if(error){
+			$scope.errorMsg = msg;
+			showWarning();
+		}
 	};
 	
 	});

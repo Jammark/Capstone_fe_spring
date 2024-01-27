@@ -22,19 +22,22 @@
 <script type="text/javascript" src="<c:url value="/resources/assets/js/warning.js" />"></script>
 </head>
 <body>
+
 <script>
+
 var baseUrl = '${baseUrl}';
 var array = '${jsonImgs}';
 var count = '${count}';
 var mete = '${json}';
-console.table('${jsonP}');
+//console.table('${jsonP}');
 var map = '${jsonP}';
 var token = '${token}';
+
 </script>
 <section class="container-fluid mx-0 p-0" ng-app="homeApp" >
 
 <div id="main" class="d-flex justify-content-center align-items-center flex-column w-100" ng-controller="homeCtrl" ng-init="initHome()">
-
+<%@ include file="/WEB-INF/views/fragments/warning.jspf" %>
 	 <%@ include file="/WEB-INF/views/fragments/header.jspf" %>
 	
 	 <section class="mt-4 w-100 pb-0">
