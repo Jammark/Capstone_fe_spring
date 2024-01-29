@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
       <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false"%>
-<%@ page import=" org.slf4j.Logger, org.slf4j.LoggerFactory"%>
+<%@ page import=" org.slf4j.Logger, org.slf4j.LoggerFactory, capstone.fe.spring.model.Destinazione, java.util.List"%>
 
 <!DOCTYPE html>
 <html>
@@ -13,6 +13,7 @@
 <%@ include file="/WEB-INF/views/fragments/head.jspf" %>
 
 <link rel="stylesheet" href="<c:url value="/resources/assets/css/dest.css" />"/>
+<link rel="stylesheet" href="<c:url value="/resources/assets/css/prenotazione.css" />"/>
 <link rel="stylesheet" href="<c:url value="/webjars/mdbootstrap/4.20.0/css/mdb.min.css" />"/>
 <link rel="stylesheet" href="<c:url value="/resources/assets/css/catalogo-alloggi.css" />"/>
 <script src="<c:url value="/webjars/bootstrap/5.3.2/js/bootstrap.min.js" />"></script>
@@ -21,6 +22,7 @@
 <script type="module" src="<c:url value="/resources/assets/js/dest.js" />"></script>
 <script type="module" src="<c:url value="/resources/assets/js/catalogo-alloggi.js" />"></script>
 <script type="text/javascript" src="<c:url value="/resources/assets/js/warning.js" />"></script>
+<script type="module" src="<c:url value="/resources/assets/js/prenotazione.js" />"></script>
 </head>
 <body>
 
@@ -30,6 +32,13 @@
 var baseUrl = '${baseUrl}';
 var hotels = '${jsonH}';
 var appartamenti = '${jsonA}';
+var nc = '${nc}';
+var metaMap = new Map();
+<% Long[] array = ((Destinazione)request.getAttribute("dest")).getCityIds();
+	for(int i = 0; i< array.length; i++){%>
+		metaMap.set(<%=array[i]%>,'<%=((List<String>)request.getAttribute("cities")).get(i)%>');
+<%}%>
+
 </script>
 <section class="container-fluid mx-0 p-0" ng-app="metaApp" >
 
@@ -78,8 +87,8 @@ var appartamenti = '${jsonA}';
       <h2></h2>
     </div>
     <div class="col-2"></div>
-    <div class="col-12" *ngIf="alloggio">
-      <app-prenotazione-helper [nomeArrivo]="city?.nome" [alloggio]="alloggio"></app-prenotazione-helper>
+    <div class="col-12" ng-if="check()">
+       <%@ include file="/WEB-INF/views/fragments/prenotazione.jspf" %>
     </div>
 
     <div class="col-12">

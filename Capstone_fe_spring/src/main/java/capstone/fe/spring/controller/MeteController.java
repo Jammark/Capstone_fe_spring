@@ -72,6 +72,21 @@ public class MeteController {
 				model.addAttribute("appartamenti", new ArrayList<Appartamento>());
 				model.addAttribute("cities", new ArrayList<String>());
 
+				Request getNCRequest = Dsl.get("http://localhost:3018/mete/città")
+						.setHeader("Content-Type", "application/json").setHeader("Accept", "application/json")
+						.setHeader("Authorization", "Bearer " + user.getToken()).setRequestTimeout(4000).build();
+
+				Future<Response> responseNCFuture = client.executeRequest(getNCRequest);
+
+				res = responseNCFuture.get();
+				result = res.getStatusCode() == 200;
+
+				if (result) {
+					List<String> nc = mapper.readValue(res.getResponseBody(), new TypeReference<List<Città>>() {
+					}).stream().map(Città::getNome).collect(Collectors.toList());
+					model.addAttribute("nc", mapper.writeValueAsString(nc));
+				}
+
 				for (int i = 0; i < d.getCityIds().length; i++) {
 					Request getHRequest = Dsl.get("http://localhost:3018/alloggi/hotels/meta/" + d.getCityIds()[i])
 							.setHeader("Content-Type", "application/json").setHeader("Accept", "application/json")
