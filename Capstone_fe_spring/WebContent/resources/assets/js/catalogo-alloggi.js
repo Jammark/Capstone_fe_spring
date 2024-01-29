@@ -26,7 +26,10 @@ app.controller('alloggiCtrl', function($scope, $http){
 	
 	$scope.selezionaAppartamento = function(index){
 		let a = $scope.appartamenti[index];
-		$scope.alloggio = a;
+		$scope.$parent.alloggio = a;
+		$scope.$parent.show = true;
+		console.log('selezione hotel');
+		console.table(a);
 	}
 	
 	

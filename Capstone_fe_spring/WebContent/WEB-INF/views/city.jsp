@@ -32,6 +32,8 @@ var baseUrl = '${baseUrl}';
 var hotels = '${jsonH}';
 var appartamenti = '${jsonA}';
 var nc = '${nc}';
+var metaMap = new Map();
+metaMap.set(${city.id}, '${city.nome}');
 </script>
 <section class="container-fluid mx-0 p-0" ng-app="metaApp" >
 

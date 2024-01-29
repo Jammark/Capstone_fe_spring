@@ -5,7 +5,7 @@
         <h2>{{titolo}}</h2>
       </div>
     </div>
-    <div ng-if="this.voli && this.voli.length > 0 else empty">
+    <div ng-if="voli && voli.length > 0">
       <div ng-repeat="volo in voli">
         <div class="col-12">
           <div class="card p-2">
@@ -31,7 +31,7 @@
               </div>
               <div class="col-3">
                 <div class="d-flex align-items-center justify-content-center flex-column h-100">
-                  <button type="button" class="btn btn-success rounded" (click)="select(volo)">Seleziona</button>
+                  <button type="button" class="btn btn-success rounded" ng-click="select(volo)">Seleziona</button>
                 </div>
               </div>
             </div>
@@ -41,8 +41,8 @@
 
     </div>
 
-    <ng-template #empty>
+    <div ng-if="!voli || voli.length == 0">
       <h4>Nessun risultato</h4>
-    </ng-template>
+    </div>
   </div>
 </div>

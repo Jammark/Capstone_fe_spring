@@ -1,7 +1,7 @@
 <div id="prentz" class="col-12" ng-controller="prenotazioneCtrl" ng-init="initPrenotazione()">
   <div class="row">
     <div class="col-12">
-      <form #form="ngForm" ng-submit="submit()" class="w-100">
+      <form name="form" ng-submit="submit()" class="w-100">
         <div ngModelGroup="prnt" #prntGroup="ngModelGroup" id="prnt">
           <div class="py-2 d-flex justify-content-around w-100">
             <div class="form-group p-2 d-flex flex-column align-items-center flex-fill">
@@ -33,7 +33,7 @@
        -->
               </div>
               <div class="flex-fill d-flex align-items-center justify-content-center">
-                <button type="submit" [disabled]="form.invalid" class="btn btn-primary mt-3"><i class="fa-solid fa-magnifying-glass me-2"></i>Cerca voli</button>
+                <button type="submit" ng-disabled="form.$invalid" class="btn btn-primary mt-3"><i class="fa-solid fa-magnifying-glass me-2"></i>Cerca voli</button>
               </div>
               </div>
         </div>
@@ -44,7 +44,7 @@
       <h2></h2>
     </div>
 
-    <div class="col-12 my-4" ng-if="checked">
+    <div class="col-12 my-4" ng-if="checked()" ng-controller="voliACtrl" ng-init="initVoliA()">
     
      <%@ include file="/WEB-INF/views/fragments/ricerca-trasporto.jspf" %>
     <!--
@@ -52,7 +52,7 @@
       -->
     </div>
 
-    <div class="col-12 my-4" ng-if="checked">
+    <div class="col-12 my-4" ng-if="checked()" ng-controller="voliRCtrl" ng-init="initVoliR()">
     <%@ include file="/WEB-INF/views/fragments/ricerca-trasporto.jspf" %>
     <!--  
       <app-ricerca-trasporto [titolo]="'Voli ritorno'" [data]="ritorno" [partenza]="nomeArrivo" [arrivo]="nomePartenza" (emitter)="setRitorno($event)"></app-ricerca-trasporto>
@@ -65,13 +65,13 @@
         <div class="col-6">
       <div class="card-header">
         <h4 class="card-text my-2 mx-3">Alloggio: {{alloggio.nome}}</h4>
-        <div class="d-flex align-items-center justify-content-between w-100 my-2" ng-if="viaggioAndata">
+        <div class="d-flex align-items-center justify-content-between w-100 my-2" ng-if="showA()">
           <h4 class="card-text mx-3">Andata: <span class="fs-5">{{viaggioAndata.nome}}</span></h4>
-          <button class="btn btn-danger mx-3" (click)="rimuoviAndata()"><i class="fa-solid fa-trash-can me-2"></i>Rimuovi</button>
+          <button class="btn btn-danger mx-3" ng-click="rimuoviA()"><i class="fa-solid fa-trash-can me-2"></i>Rimuovi</button>
         </div>
         <div class="d-flex align-items-center justify-content-between w-100 my-2" ng-if="viaggioRitorno">
           <h4 class="card-text mx-3">Ritorno: <span class="fs-5">{{viaggioRitorno.nome}}</span></h4>
-          <button class="btn btn-danger mx-3" (click)="rimuoviRitorno()"><i class="fa-solid fa-trash-can me-2"></i>Rimuovi</button>
+          <button class="btn btn-danger mx-3" ng-click="rimuoviR()"><i class="fa-solid fa-trash-can me-2"></i>Rimuovi</button>
         </div>
       </div>
       </div>
@@ -80,22 +80,22 @@
 
 
       <div class="col-6">
-        <form #form1="ngForm" ng-submit="submit()" class="w-100">
+        <form name="form1" ng-submit="submit()" class="w-100">
         <div class="d-flex w-100 align-items-center justify-content-end p-4 h-100">
 
           <div ngModelGroup="prnt1" #prnt1Group="ngModelGroup" id="prnt1">
             <div class="py-2 d-flex justify-content-around w-50 mx-2">
               <div class="form-group p-2 d-flex flex-column align-items-center flex-fill">
                 <div class="form-outline" style="width: 22rem;">
-                <input mdbInput class="form-control active" id="num" type="number" min="1" [max]="getMaxPosti()" step="1" value="1" name="num" ng-model="numeroPosti"
-                  required #num ="ngModel" >
+                <input mdbInput class="form-control active" id="num" type="number" min="1" ng-max="getMaxPosti()" step="1" value="1" name="num" ng-model="numeroPosti"
+                  required  >
                   <label class="form-label" for="num">Numero posti</label>
                 </div>
                 </div>
             </div>
           </div>
 
-          <button type="submit" [disabled]="form1.invalid || !this.viaggioAndata || !this.viaggioRitorno" class="btn btn-primary" data-toggle="modal" data-target="#modalPushPrenota"><i class="fa-solid fa-bookmark me-2"></i>Prenota</button><!--(click)="showModal('p')"-->
+          <button type="submit" ng-disabled="!viaggioAndata || !viaggioRitorno || form1.$invalid" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalPushPrenota"><i class="fa-solid fa-bookmark me-2"></i>Prenota</button><!--(click)="showModal('p')"-->
         </div>
       </form>
       </div>
@@ -109,7 +109,7 @@
   </div>
 
 
-</div>
+
 
 <div class="container">
   <!-- Modal -->
@@ -154,8 +154,8 @@ aria-hidden="true">
 
     <!--Footer-->
     <div class="modal-footer flex-center">
-      <a  class="btn btn-info" (click)="prenota()" data-dismiss="modal">Conferma</a>
-      <a type="button" class="btn btn-outline-info waves-effect" data-dismiss="modal">Annulla</a>
+      <a  class="btn btn-info" ng-click="prenota()" data-bs-dismiss="modal">Conferma</a>
+      <a type="button" class="btn btn-outline-info waves-effect" data-bs-dismiss="modal">Annulla</a>
     </div>
   </div>
   <!--/.Content-->
@@ -177,7 +177,7 @@ aria-hidden="true">
                </div>
                <div class="modal-footer">
 
-                 <button id="confirm" type="button" class="btn btn-outline-danger" data-bs-dismiss="modal" (click)="chiudi()">Ok</button>
+                 <button id="confirm" type="button" class="btn btn-outline-danger" data-bs-dismiss="modal" ng-click="chiudi()">Ok</button>
                </div>
              </div>
            </div>
@@ -207,10 +207,12 @@ aria-hidden="true">
     <!--Footer-->
     <div class="modal-footer flex-center">
 
-      <a type="button" class="btn btn-outline-info waves-effect"  data-bs-dismiss="modal" (click)="chiudi()">OK</a>
+      <a type="button" class="btn btn-outline-info waves-effect"  data-bs-dismiss="modal" ng-click="chiudi()">OK</a>
     </div>
   </div>
   <!--/.Content-->
 </div>
 </div>
 <!--Modal: modalPush-->
+
+</div>

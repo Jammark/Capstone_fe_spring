@@ -6,6 +6,12 @@ app.controller('metaCtrl', ['$scope', '$controller', function($scope, $controlle
 	$scope.show = false;
 	$scope.alloggio = undefined;
 	
+	$scope.$on('onChildChange', function (event, result) {
+			console.log('child change.');
+    		console.log(result.data);
+    		$scope.count = result.data;
+		});
+	
 	$scope.initMeta = function(){
 		$scope.count = 3;
 		if(error){
