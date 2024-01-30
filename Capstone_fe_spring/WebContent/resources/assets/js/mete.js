@@ -4,7 +4,7 @@ app.controller('meteCtrl', function($scope, $http){
 	
 	
 	$scope.initMete = function(data){
-		$scope.count = 3;
+		$scope.count = count;
 		
 		if(error){
 			$scope.errorMsg = msg;

@@ -13,7 +13,7 @@ app.controller('metaCtrl', ['$scope', '$controller', function($scope, $controlle
 		});
 	
 	$scope.initMeta = function(){
-		$scope.count = 3;
+		$scope.count = count;
 		if(error){
 			$scope.errorMsg = msg;
 			showWarning();

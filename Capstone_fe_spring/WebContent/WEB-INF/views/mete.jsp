@@ -21,6 +21,9 @@
 <script type="text/javascript" src="<c:url value="/resources/assets/js/warning.js" />"></script>
 </head>
 <body>
+<script>
+var count = '${count}';
+</script>
 <section class="container-fluid mx-0 p-0" ng-app="meteApp" >
 
 <div id="main" class="d-flex justify-content-center align-items-center flex-column w-100" ng-controller="meteCtrl" ng-init="initMete()">

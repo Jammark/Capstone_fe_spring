@@ -29,6 +29,7 @@
 var baseUrl = '${baseUrl}';
 var json ='${json}';
 var token = '${token}';
+var count = '${count}';
 var redirection = '<%=request.getContextPath() + "/riepilogo"%>';
 </script>
 

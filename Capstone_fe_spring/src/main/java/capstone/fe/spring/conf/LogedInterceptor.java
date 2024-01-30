@@ -38,8 +38,16 @@ public class LogedInterceptor implements HandlerInterceptor {
 				HttpSession session = request.getSession();
 				try {
 					if (session != null) { // Infinite
-						RequestDispatcher requestDispatcher = request.getRequestDispatcher("login_reset");
+						RequestDispatcher requestDispatcher = request.getRequestDispatcher("/login_reset");
+
+						// request.getParameterMap().clear();
 						requestDispatcher.forward(request, response);
+						// Map<String, Object> m = new HashMap<>();
+						// m.put("notlogged", true);
+						// ModelAndView mav = new ModelAndView("login", m);
+						// eventually populate the model
+
+						// throw new ModelAndViewDefiningException(mav);
 
 					}
 				} catch (Exception e) {

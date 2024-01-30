@@ -21,6 +21,9 @@
 <script type="text/javascript" src="<c:url value="/resources/assets/js/riepilogo.js" />"></script>
 </head>
 <body>
+<script>
+var count = '${count}';
+</script>
 <section class="mx-0 p-0" ng-app="riepilogoApp" >
 <div id="main" class="d-flex justify-content-center align-items-center flex-column w-100"  ng-controller="riepilogoCtrl" ng-init="initRiepilogo()">
 	  <%@ include file="/WEB-INF/views/fragments/warning.jspf" %>

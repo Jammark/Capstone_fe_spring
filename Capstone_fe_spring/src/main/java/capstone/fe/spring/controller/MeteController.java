@@ -26,6 +26,7 @@ import capstone.fe.spring.model.Città;
 import capstone.fe.spring.model.Destinazione;
 import capstone.fe.spring.model.Hotel;
 import capstone.fe.spring.model.MetaImgWrapper;
+import capstone.fe.spring.model.Prenotazione;
 import capstone.fe.spring.model.User;
 import capstone.fe.spring.model.UserWrapper;
 import lombok.extern.slf4j.Slf4j;
@@ -67,7 +68,7 @@ public class MeteController {
 				model.addAttribute("dest", d);
 				model.addAttribute("img", "http://localhost:3018/mete/image/" + d.getImgUrl());
 				log.info("" + d);
-
+				addCartCount(model, client, user.getToken());
 				model.addAttribute("hotels", new ArrayList<Hotel>());
 				model.addAttribute("appartamenti", new ArrayList<Appartamento>());
 				model.addAttribute("cities", new ArrayList<String>());
@@ -198,7 +199,7 @@ public class MeteController {
 				model.addAttribute("city", c);
 				model.addAttribute("img", "http://localhost:3018/mete/image/" + c.getImgUrl());
 				log.info("" + c);
-
+				addCartCount(model, client, user.getToken());
 				Request getNCRequest = Dsl.get("http://localhost:3018/mete/città")
 						.setHeader("Content-Type", "application/json").setHeader("Accept", "application/json")
 						.setHeader("Authorization", "Bearer " + user.getToken()).setRequestTimeout(4000).build();
@@ -297,7 +298,7 @@ public class MeteController {
 				model.addAttribute("città", l);
 
 				log.info("" + l);
-
+				addCartCount(model, client, user.getToken());
 
 				getRequest = Dsl.get("http://localhost:3018/mete/destinazioni")
 						.setHeader("Content-Type", "application/json").setHeader("Accept", "application/json")
@@ -344,5 +345,18 @@ public class MeteController {
 			}
 			return "mete";
 		}
+	}
+
+	private void addCartCount(Model model, AsyncHttpClient client, String token) throws Exception {
+		Request getRequest = Dsl.get("http://localhost:3018/prenotazioni/saldo")
+				.setHeader("Content-Type", "application/json").setHeader("Accept", "application/json")
+				.setHeader("Authorization", "Bearer " + token).setRequestTimeout(4000).build();
+
+		Future<Response> responseFuture = client.executeRequest(getRequest);
+		Response res = responseFuture.get();
+		List<Prenotazione> l = mapper.readValue(res.getResponseBody(), new TypeReference<List<Prenotazione>>() {
+		});
+
+		model.addAttribute("count", l.size());
 	}
 }

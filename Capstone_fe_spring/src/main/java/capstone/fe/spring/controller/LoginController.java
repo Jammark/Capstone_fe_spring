@@ -35,7 +35,7 @@ public class LoginController {
 	public String login_reset(Locale locale, Model model, RedirectAttributes ra) {
 		ra.addAttribute("notlogged", true);
 		// this.authData.setUser(null);
-		return "redirect:login";
+		return "redirect:/login";
 	}
 
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)

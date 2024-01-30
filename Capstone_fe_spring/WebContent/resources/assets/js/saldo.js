@@ -4,7 +4,7 @@ app.controller('saldoCtrl', function($scope, $http){
 	
 	
 	$scope.initSaldo = function(){
-		$scope.count = 3;
+		$scope.count = count;
 		if(!error){
 		$scope.prenotazioni = JSON.parse(json);
 		$scope.token = token;

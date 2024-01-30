@@ -67,6 +67,8 @@ public class PrenotazioniController {
 				model.addAttribute("prenotazioni", lh);
 				model.addAttribute("json", res.getResponseBody());
 
+				addCartCount(model, client, user.getToken());
+
 				Map<Long, Alloggio> aMap = new HashMap<>();
 				model.addAttribute("alloggi", aMap);
 
@@ -188,7 +190,7 @@ public class PrenotazioniController {
 			List<Acquisto> lh = mapper.readValue(res.getResponseBody(), new TypeReference<List<Acquisto>>() {
 			});
 			model.addAttribute("acquisti", lh);
-
+			addCartCount(model, client, user.getToken());
 			Map<Long, Città> cMap = new HashMap<>();
 			model.addAttribute("cities", cMap);
 			Map<Long, Alloggio> aMap = new HashMap<Long, Alloggio>();
@@ -256,5 +258,18 @@ public class PrenotazioniController {
 			return "riepilogo";
 		}
 
+	}
+
+	private void addCartCount(Model model, AsyncHttpClient client, String token) throws Exception {
+		Request getRequest = Dsl.get("http://localhost:3018/prenotazioni/saldo")
+				.setHeader("Content-Type", "application/json").setHeader("Accept", "application/json")
+				.setHeader("Authorization", "Bearer " + token).setRequestTimeout(4000).build();
+
+		Future<Response> responseFuture = client.executeRequest(getRequest);
+		Response res = responseFuture.get();
+		List<Prenotazione> l = mapper.readValue(res.getResponseBody(), new TypeReference<List<Prenotazione>>() {
+		});
+
+		model.addAttribute("count", l.size());
 	}
 }

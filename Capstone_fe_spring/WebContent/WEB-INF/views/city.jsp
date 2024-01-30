@@ -31,6 +31,7 @@
 var baseUrl = '${baseUrl}';
 var hotels = '${jsonH}';
 var appartamenti = '${jsonA}';
+var count = '${count}';
 var nc = '${nc}';
 var metaMap = new Map();
 metaMap.set(${city.id}, '${city.nome}');
