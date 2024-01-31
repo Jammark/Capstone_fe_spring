@@ -15,9 +15,11 @@ app.controller('homeCtrl', function($scope, $http){
 		}else{
 			$scope.imgs = JSON.parse(array);
 		$scope.mete = JSON.parse(mete);
+		if(logged){
 		$scope.check = new Map();
 		$scope.mete.forEach(m => $scope.check.set(m, false));
 		$scope.pacchetti = JSON.parse(map);
+		}
 		$scope.baseUrl = baseUrl;
 		$scope.token = token;
 		}

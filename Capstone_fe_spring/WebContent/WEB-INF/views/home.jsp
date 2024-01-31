@@ -32,6 +32,7 @@ var mete = '${json}';
 //console.table('${jsonP}');
 var map = '${jsonP}';
 var token = '${token}';
+var logged = ${user != null};
 
 </script>
 <section class="container-fluid mx-0 p-0" ng-app="homeApp" >
@@ -61,7 +62,7 @@ var token = '${token}';
         <div class="card-header d-flex flex-column w-50 mx-5 my-5" *ngIf="true">
           <div class="d-flex align-items-center justify-content-between py-1">
               <h2 class="card-title"><c:out value = "${meta.nome}"/></h2>
-              <button id="mSel"type="button" class="btn btn-trasparent p-1" (click)="selectMeta(meta)">
+              <a id="mSel"type="button" class="btn btn-trasparent p-1" href="<%=request.getContextPath()+"/city/"%>${meta.id}">
 
                 <span class="d-flex align-items-center justify-content-center">
                   <i class="fa-solid fa-arrow-right fa-2xl h-100 w-100"></i>
@@ -71,7 +72,7 @@ var token = '${token}';
                 </svg>
                 -->
               </span>
-              </button>
+              </a>
           </div>
         </div>
 <!--

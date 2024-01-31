@@ -52,6 +52,20 @@ public class HomeController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String start(Locale locale, Model model) {
+		log.info("Home Page Requested, locale = " + locale);
+		Date date = new Date();
+		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+
+		String formattedDate = dateFormat.format(date);
+
+		model.addAttribute("baseUrl", baseUrl);
+		User user = this.authData.getUser();
+		model.addAttribute("user", user);
+		return loadData(user, model);
+	}
+
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		log.info("Home Page Requested, locale = " + locale);
@@ -79,13 +93,13 @@ public class HomeController {
 	}
 
 	private String loadData(User user, Model model) {
-		model.addAttribute("token", user.getToken());
+
 		AsyncHttpClient client = Dsl.asyncHttpClient();
 
 
 		Request getRequest = Dsl.get(this.baseUrl + "mete/città/most_rated")
 				.setHeader("Content-Type", "application/json")
-				.setHeader("Accept", "application/json").setHeader("Authorization", "Bearer " + user.getToken())
+				.setHeader("Accept", "application/json")// .setHeader("Authorization", "Bearer " + user.getToken())
 				.setRequestTimeout(4000).build();
 
 		Future<Response> responseFuture = client.executeRequest(getRequest);
@@ -93,7 +107,6 @@ public class HomeController {
 
 			Response res = responseFuture.get();
 			boolean result = res.getStatusCode() == 200;
-
 
 
 			Map<Long, List<Prenotazione>> pMap = new HashMap<>();
@@ -120,7 +133,11 @@ public class HomeController {
 				log.info("" + l);
 				log.info("" + mapper.writeValueAsString(imgs));
 
-				addCartCount(model, client, user.getToken());
+
+
+				if (user != null) {
+					model.addAttribute("token", user.getToken());
+					addCartCount(model, client, user.getToken());
 
 				for (Città c : l) {
 					Request getPRequest = Dsl.get(this.baseUrl + "prenotazioni/" + c.getId())
@@ -212,12 +229,16 @@ public class HomeController {
 				}
 
 				model.addAttribute("jsonP", mapper.writeValueAsString(model.getAttribute("pacchetti")));
+
+			}
 			} else {
 				log.info("empty");
 				model.addAttribute("data", "empty");
 			}
 
 			log.info("pacchetti: " + model.getAttribute("pacchetti"));
+
+
 
 		} catch (Exception e) {
 			e.printStackTrace();

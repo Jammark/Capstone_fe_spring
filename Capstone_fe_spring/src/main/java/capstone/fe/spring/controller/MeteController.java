@@ -49,6 +49,7 @@ public class MeteController {
 
 		AsyncHttpClient client = Dsl.asyncHttpClient();
 		User user = this.authData.getUser();
+		model.addAttribute("user", user);
 		model.addAttribute("token", user.getToken());
 		model.addAttribute("baseUrl", this.baseUrl);
 		Request getRequest = Dsl.get("http://localhost:3018/mete/destinazioni/" + metaId)
@@ -180,7 +181,7 @@ public class MeteController {
 
 		AsyncHttpClient client = Dsl.asyncHttpClient();
 		User user = this.authData.getUser();
-
+		model.addAttribute("user", user);
 		model.addAttribute("token", user.getToken());
 		model.addAttribute("baseUrl", this.baseUrl);
 		Request getRequest = Dsl.get("http://localhost:3018/mete/città/" + metaId)
@@ -281,7 +282,7 @@ public class MeteController {
 
 		AsyncHttpClient client = Dsl.asyncHttpClient();
 		User user = this.authData.getUser();
-
+		model.addAttribute("user", user);
 		Request getRequest = Dsl.get("http://localhost:3018/mete/città").setHeader("Content-Type", "application/json")
 				.setHeader("Accept", "application/json").setHeader("Authorization", "Bearer " + user.getToken())
 				.setRequestTimeout(4000).build();
